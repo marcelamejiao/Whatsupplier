@@ -1,4 +1,4 @@
-# **WhatSupplier**
+# **WhatSupplier - MERN Stack Single-Page Application**
 
 ## **Table of Contents** 
 
