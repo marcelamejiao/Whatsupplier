@@ -21,18 +21,21 @@ In the Supply Chain process the factory purchases the raw materials from diverse
 
 * WhatSupplier will use a function to determine the quantity in inventory of any raw material to proceed with placing a new order. This function is called ROP “Reorder Point’.
  
-  What is a Reorder Point? 
-    Order Point (aka Reorder Point) is a key concept within Inventory Management. Order too soon and financials will suffer as too much money is invested in inventory and you may not have enough space to store the inventory. Order too late and you may run out of inventory resulting in waste in the form of stock outs and poor customer service.
-    Order Point formula is:
-    Anticipated Demand (D) x Lead Time (L) + Safety Stock (SS) Ref: https://apicsdotcoach.wordpress.com/2017/02/18/order-point/
+      What is a Reorder Point? 
+      Order Point (aka Reorder Point) is a key concept within Inventory Management. Order too soon and financials will suffer as too much money is invested in inventory and you may not have enough space to store the inventory. Order too late and you may run out of inventory resulting in waste in the form of stock outs and poor customer service.
+      Order Point formula is:
+      Anticipated Demand (D) x Lead Time (L) + Safety Stock (SS) 
+      Ref: https://apicsdotcoach.wordpress.com/2017/02/18/order-point/
 
 * Sending Raw Materials to production: 
 When the user sends an amount of raw materials to production the total amount of this raw material will decrease. If it is time to place a new order a display notification is shown on screen to proceed with the reorder process. 
 
 ### **User Story:**
-AS A manager in a Suppliers and Raw Materials Inventory area,
-I WANT to choose the best supplier with the lowest cost, supervise stocks and place raw materials orders on time,
-SO THAT I can effectively provide the stocks to the production area and optimize the supply chain process in the company.
+  AS A manager in a Suppliers and Raw Materials Inventory area,
+
+  I WANT to choose the best supplier with the lowest cost, supervise stocks and place raw materials orders on time,
+
+  SO THAT I can effectively provide the stocks to the production area and optimize the supply chain process in the company.
 
 ### **Wireframes:**
  To see the wireframes and aditional information about the project planning: [click here!](https://docs.google.com/document/d/1GMc3-rKcXWFA2Aj1BXcAQgLNudQANhHkr_l39hxE-J4/edit#heading=h.yyrhu7ml5bea)
