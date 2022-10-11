@@ -8,12 +8,6 @@ const materialSchema = new Schema(
       unique: true,
     },
   },
-  // set this to use virtual below
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
 );
 
 
