@@ -2,7 +2,7 @@ const { Schema, Types } = require('mongoose');
 
 const userMaterialsSchema = new Schema(
   {
-    materialtId: {
+    material: {
       type: Schema.Types.ObjectId,
       ref: 'material',
     },
@@ -10,7 +10,14 @@ const userMaterialsSchema = new Schema(
       type: Number,
       required: true,
     },
-
+    safetyStock: {
+      type: Number,
+      required: true,
+    },
+    anticipatedDemand: {
+      type: Number,
+      required: true,
+    },
   },
 );
 
