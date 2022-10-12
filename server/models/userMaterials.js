@@ -2,7 +2,7 @@ const { Schema, Types } = require('mongoose');
 
 const userMaterialsSchema = new Schema(
   {
-    materialtId: {
+    material: {
       type: Schema.Types.ObjectId,
       ref: 'material',
     },
