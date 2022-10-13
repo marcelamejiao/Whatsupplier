@@ -50,7 +50,7 @@ const resolvers = {
     updateSupplier: async (parent, args, context) => {
       
     },
-    deleteSupplier: async (parent, { supplierId }, context) => {
+    deleteSupplier: async (parent, { _id }, context) => {
       
     },
     updateUserMaterial: async (parent, args, context) => {
