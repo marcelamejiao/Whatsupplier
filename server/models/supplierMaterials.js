@@ -10,6 +10,10 @@ const supplierMaterialsSchema = new Schema(
       type: Number,
       required: true,
     },
+    leadTime: {
+      type: Number,
+      required: true,
+    },
   },
 );
 
