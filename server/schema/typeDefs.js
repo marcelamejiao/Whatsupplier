@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-  type User{
+  type User {
     _id: ID
     username: String
     email: String
@@ -9,14 +9,14 @@ const typeDefs = gql`
     userMaterials: [userMaterialsSchema]
   }
 
-  type userMaterialsSchema{
+  type userMaterialsSchema {
     material: Material
     stock: Int
     safetyStock: Int
     anticipatedDemand: Int
   }
 
-  type Supplier{
+  type Supplier {
     _id: ID
     name: String
     email: String
@@ -26,7 +26,7 @@ const typeDefs = gql`
     supplierMaterials: [supplierMaterialsSchema]
   }
 
-  type supplierMaterialsSchema{
+  type supplierMaterialsSchema {
     material: Material
     cost: Float
     leadTime: Int
@@ -38,20 +38,20 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
-    suppliers: Supplier
+    user: [User]
+    suppliers: [Supplier]
     supplier(_id: ID!): Supplier
-    userMaterials: [userMaterialsSchema]
-    userMaterial(_id: ID!): [userMaterialsSchema]
+    me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addSupplier(name: String!, email: String!, address: String!, phone: String!): Supplier
-    updateSupplier(name: String! email: String! address: String! phone: String!): Supplier
+    addSupplier(_id: ID!,name: String!, email: String!, address: String!, phone: String!): Supplier
+    updateSupplier(_id: ID!, name: String! email: String! address: String! phone: String!): Supplier
     deleteSupplier(_id: ID!):Supplier
-    updateUserMaterial(name: String! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
+    updateUserMaterial(_id: ID!, name: String! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
+    updateSupplierMaterial(_id: ID!, materialName: String, cost: Float, leadTime: int): Supplier
   }
 `;
 
