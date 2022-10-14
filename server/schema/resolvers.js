@@ -44,10 +44,13 @@ const resolvers = {
 
             return { token, user };
         },
-        addSupplier: async (parent, { supplierText }, context) => {
+        addSupplier: async (parent, { name, email, address, phone }, context) => {
             if (context.user) {
                 const newSupplier = Supplier.create({
-                    supplierText,
+                    name,
+                    email,
+                    address,
+                    phone,
                     user: context.user._id,
                 });
                 return newSupplier;
