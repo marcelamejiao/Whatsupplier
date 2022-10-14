@@ -64,13 +64,23 @@ const resolvers = {
       
     },
     updateSupplierMaterial: async (parent, {_id, materialId, cost, leadTime}, context) => {
-      const updatedSupplier = await Supplier.findOneAndUpdate(
+      await Supplier.findOneAndUpdate(
         { _id: _id },
-        { $addToSet: { supplierMaterials: {materialId, cost, leadTime} } },
+        {
+          $pull: { supplierMaterials: {material: materialId} },
+        },
         { new: true, runValidators: true }
       );
-      return updatedSupplier;
-}
+
+      return await Supplier.findOneAndUpdate(
+        { _id: _id },
+        {
+          $addToSet: { supplierMaterials: {material: materialId, cost, leadTime} }
+        },
+        { new: true, runValidators: true }
+      )
+      .populate({ path: 'supplierMaterials.material', select: '-__v' });
+    }
   },
 };
 
