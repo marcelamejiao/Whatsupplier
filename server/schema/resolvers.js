@@ -57,10 +57,10 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-        updateSupplier: async (parent, { supplierId, name, email, address, phone }, context) => {
+        updateSupplier: async (parent, { _id, name, email, address, phone }, context) => {
             if (context.user) {
                 return Supplier.findOneAndUpdate(
-                    { _id: supplierId },
+                    { _id: _id },
                     {
                         name,
                         email,
