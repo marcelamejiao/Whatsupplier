@@ -58,7 +58,10 @@ const resolvers = {
       
     },
     deleteSupplier: async (parent, { _id }, context) => {
-      
+        if (context.user) {
+            return Supplier.findOneAndDelete({ _id});
+          }
+          throw new AuthenticationError('You need to be logged in!');
     },
     updateUserMaterial: async (parent, args, context) => {
       
