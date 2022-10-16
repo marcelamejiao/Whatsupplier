@@ -32,13 +32,17 @@ const typeDefs = gql`
     leadTime: Int
   }
 
+  type Material {
+    _id: ID!
+    name: String!
+  }
+
   type Auth {
     token: ID
     user: User
   }
 
   type Query {
-    user: [User]
     suppliers: [Supplier]
     supplier(_id: ID!): Supplier
     me: User
@@ -47,11 +51,11 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addSupplier(_id: ID!,name: String!, email: String!, address: String!, phone: String!): Supplier
+    addSupplier(name: String!, email: String!, address: String!, phone: String!): Supplier
     updateSupplier(_id: ID!, name: String! email: String! address: String! phone: String!): Supplier
-    deleteSupplier(_id: ID!):Supplier
+    deleteSupplier(_id: ID!): Supplier
     updateUserMaterial(_id: ID!, name: String! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
-    updateSupplierMaterial(_id: ID!, materialName: String, cost: Float, leadTime: Int): Supplier
+    updateSupplierMaterial(_id: ID!, materialId: ID!, cost: Float!, leadTime: Int!): Supplier
   }
 `;
 
