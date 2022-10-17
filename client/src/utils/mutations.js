@@ -60,17 +60,24 @@ export const DELETE_SUPPLIER = gql`
 `;
 
 export const UPDATE_USER_MATERIAL = gql`
-    mutation updateUserMaterial() {
-        updateUserMaterial() {
-            
+    mutation updateUserMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int! {
+        updateUserMaterial(_id: $id, name: $name, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
+            userMaterials {
+                material {
+                  name
+                }
+                stock
+                safetyStock
+                anticipatedDemand
+            }
             
         }
     }
 `;
 
 export const UPDATE_SUPPLIER_MATERIAL = gql`
-    mutation updateSupplierMaterial( $_id: _id, $materialId: materialId, $cost: cost, $leadTime: leadTime) {
-        updateSupplierMaterial(_id: $_id, materialId: $materialId, cost: $cost, leadTime: $leadTime) {
+    mutation updateSupplierMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int!) {
+        updateSupplierMaterial(_id: $id, materialId: $materialId, cost: $cost, leadTime: $leadTime) {
             _id
             name
             supplierMaterials{
