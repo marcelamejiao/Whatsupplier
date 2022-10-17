@@ -54,7 +54,7 @@ const typeDefs = gql`
     addSupplier(name: String!, email: String!, address: String!, phone: String!): Supplier
     updateSupplier(_id: ID!, name: String! email: String! address: String! phone: String!): Supplier
     deleteSupplier(_id: ID!): Supplier
-    updateUserMaterial(_id: ID!, name: String! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
+    updateUserMaterial(_id: ID!, materialId: String! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
     updateSupplierMaterial(_id: ID!, materialId: ID!, cost: Float!, leadTime: Int!): Supplier
   }
 `;

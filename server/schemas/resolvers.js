@@ -78,9 +78,26 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    updateUserMaterial: async (parent, args, context) => {
 
+    updateUserMaterial: async (parent, { _id, materialId, stock, safetyStock, anticipatedDemand } , context) => {
+      await User.findOneAndUpdate(
+        { _id: _id },
+        {
+          $pull: { userMaterials: { material: materialId } },
+        },
+        { new: true, runValidators: true }
+      );
+
+      return await User.findOneAndUpdate(
+        { _id: _id },
+        {
+          $addToSet: { userMaterials: { material: materialId, stock, safetyStock, anticipatedDemand } }
+        },
+        { new: true, runValidators: true }
+      )
+        .populate({ path: 'userMaterials.material', select: '-__v' });
     },
+
     updateSupplierMaterial: async (parent, { _id, materialId, cost, leadTime }, context) => {
       await Supplier.findOneAndUpdate(
         { _id: _id },
