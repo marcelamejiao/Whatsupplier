@@ -56,7 +56,7 @@ const resolvers = {
     },
     updateSupplier: async (parent, { _id, name, email, address, phone }, context) => {
       if (context.user) {
-        return Supplier.findOneAndUpdate(
+        return await Supplier.findOneAndUpdate(
           { _id: _id },
           {
             name,
