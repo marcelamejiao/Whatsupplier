@@ -73,7 +73,10 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     deleteSupplier: async (parent, { _id }, context) => {
-
+      if (context.user) {
+        return await Supplier.findOneAndDelete({ _id});
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     updateUserMaterial: async (parent, args, context) => {
 
