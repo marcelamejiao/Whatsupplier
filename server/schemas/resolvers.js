@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     suppliers: async () => {
-        return Supplier.find();
+      return Supplier.find();
     },
     supplier: async (parent, { supplierId }) => {
       return Supplier.findOne({ _id: supplierId });
@@ -43,31 +43,46 @@ const resolvers = {
     },
     addSupplier: async (parent, { name, email, address, phone }, context) => {
       if (context.user) {
-          const newSupplier = await Supplier.create({
-              name,
-              email,
-              address,
-              phone,
-              user: context.user._id,
-          });
-          return newSupplier;
+        const newSupplier = await Supplier.create({
+          name,
+          email,
+          address,
+          phone,
+          user: context.user._id,
+        });
+        return newSupplier;
       }
       throw new AuthenticationError('You need to be logged in!');
-  },
-    updateSupplier: async (parent, args, context) => {
-      
+    },
+    updateSupplier: async (parent, { _id, name, email, address, phone }, context) => {
+      if (context.user) {
+        return await Supplier.findOneAndUpdate(
+          { _id: _id },
+          {
+            name,
+            email,
+            address,
+            phone,
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     deleteSupplier: async (parent, { _id }, context) => {
-      
+
     },
     updateUserMaterial: async (parent, args, context) => {
-      
+
     },
-    updateSupplierMaterial: async (parent, {_id, materialId, cost, leadTime}, context) => {
+    updateSupplierMaterial: async (parent, { _id, materialId, cost, leadTime }, context) => {
       await Supplier.findOneAndUpdate(
         { _id: _id },
         {
-          $pull: { supplierMaterials: {material: materialId} },
+          $pull: { supplierMaterials: { material: materialId } },
         },
         { new: true, runValidators: true }
       );
@@ -75,11 +90,11 @@ const resolvers = {
       return await Supplier.findOneAndUpdate(
         { _id: _id },
         {
-          $addToSet: { supplierMaterials: {material: materialId, cost, leadTime} }
+          $addToSet: { supplierMaterials: { material: materialId, cost, leadTime } }
         },
         { new: true, runValidators: true }
       )
-      .populate({ path: 'supplierMaterials.material', select: '-__v' });
+        .populate({ path: 'supplierMaterials.material', select: '-__v' });
     }
   },
 };
