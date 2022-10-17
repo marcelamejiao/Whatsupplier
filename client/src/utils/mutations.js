@@ -69,10 +69,17 @@ export const UPDATE_USER_MATERIAL = gql`
 `;
 
 export const UPDATE_SUPPLIER_MATERIAL = gql`
-    mutation updateSupplierMaterial() {
-        updateSupplierMaterial() {
-            
-        
+    mutation updateSupplierMaterial( $_id: _id, $materialId: materialId, $cost: cost, $leadTime: leadTime) {
+        updateSupplierMaterial(_id: $_id, materialId: $materialId, cost: $cost, leadTime: $leadTime) {
+            _id
+            name
+            supplierMaterials{
+                material{
+                    materialId
+                }
+                cost
+                leadTime
+            }
         }
     }
 `;
