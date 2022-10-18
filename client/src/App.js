@@ -8,8 +8,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import LandingPage from './pages/LandingPage';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 // import Home from './pages/Home';
 // import MaterialsList from './pages/MaterialsList'
 // import SingleMaterial from './pages/OneMaterial'
@@ -55,7 +55,7 @@ function App() {
                 path='/'
                 element={<LandingPage />}
               />
-              {/* <Route
+              <Route
                 path="/login"
                 element={<Login />}
               />
@@ -63,7 +63,7 @@ function App() {
                 path="/signup"
                 element={<Signup />}
               />
-              <Route
+              {/* <Route
                 path="/me"
                 element={<Home />}
               />
