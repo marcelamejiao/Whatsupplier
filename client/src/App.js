@@ -8,15 +8,15 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import LandingPage from './pages/LandingPage';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Home from './pages/Home';
-import MaterialsList from './pages/MaterialsList'
-import SingleMaterial from './pages/OneMaterial'
-import SuppliersList from './pages/SuppliersList';
-import SingleSupplier from './pages/OneSupplier';
-import Production from './pages/Production'
-import Navbar from './components/Navbar';
+// import Login from './pages/Login';
+// import Signup from './pages/Signup';
+// import Home from './pages/Home';
+// import MaterialsList from './pages/MaterialsList'
+// import SingleMaterial from './pages/OneMaterial'
+// import SuppliersList from './pages/SuppliersList';
+// import SingleSupplier from './pages/OneSupplier';
+// import Production from './pages/Production'
+// import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
@@ -48,14 +48,14 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          <Navbar />
+          {/* <Navbar /> */}
           <div>
             <Routes>
               <Route
                 path='/'
                 element={<LandingPage />}
               />
-              <Route
+              {/* <Route
                 path="/login"
                 element={<Login />}
               />
@@ -86,7 +86,7 @@ function App() {
               <Route
                 path="/suppliers/:supplierId"
                 element={<SingleSupplier />}
-              />
+              /> */}
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
