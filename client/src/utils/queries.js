@@ -6,6 +6,8 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      companyName
+      companyDetails
       userMaterials {
         material{
             _id

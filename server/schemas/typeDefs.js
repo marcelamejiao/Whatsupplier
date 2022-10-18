@@ -6,6 +6,8 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    companyName: String
+    companyDetails: String
     userMaterials: [userMaterialsSchema]
   }
 
@@ -49,7 +51,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!, companyName: String!, companyDetails: String!): Auth
     login(email: String!, password: String!): Auth
     addSupplier(name: String!, email: String!, address: String!, phone: String!): Supplier
     updateSupplier(_id: ID!, name: String! email: String! address: String! phone: String!): Supplier
