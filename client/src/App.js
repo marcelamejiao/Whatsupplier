@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import Home from './pages/Home';
+import Home from './pages/Home';
 // import MaterialsList from './pages/MaterialsList'
 // import SingleMaterial from './pages/OneMaterial'
 // import SuppliersList from './pages/SuppliersList';
@@ -49,7 +49,7 @@ function App() {
       <Router>
         <>
           <Navbar />
-          <div>
+          <div className='container-fluid'>
             <Routes>
               <Route
                 path='/'
@@ -63,10 +63,11 @@ function App() {
                 path="/signup"
                 element={<Signup />}
               />
-              {/* <Route
-                path="/me"
+              <Route
+                path="/home"
                 element={<Home />}
               />
+              {/* 
               <Route
                 path="/inventory"
                 element={<MaterialsList />}

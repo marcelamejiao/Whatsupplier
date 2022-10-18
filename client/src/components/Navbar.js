@@ -20,7 +20,7 @@ const AppNavbar = () => {
 
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/me'>
+                  <Nav.Link as={Link} to='/home'>
                     HOME
                   </Nav.Link>
                   <Nav.Link as={Link} to='/suppliers'>
