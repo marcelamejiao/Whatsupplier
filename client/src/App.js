@@ -16,7 +16,7 @@ import Signup from './pages/Signup';
 // import SuppliersList from './pages/SuppliersList';
 // import SingleSupplier from './pages/OneSupplier';
 // import Production from './pages/Production'
-// import Navbar from './components/Navbar';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 // Construct our main GraphQL API endpoint
@@ -48,7 +48,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-          {/* <Navbar /> */}
+          <Navbar />
           <div>
             <Routes>
               <Route
