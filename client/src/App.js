@@ -12,7 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import MaterialsList from './pages/MaterialsList'
-import SingleMaterial from './pages/MaterialsList'
+import SingleMaterial from './pages/OneMaterial'
 import SuppliersList from './pages/SuppliersList';
 import SingleSupplier from './pages/OneSupplier';
 import Production from './pages/Production'
@@ -72,7 +72,7 @@ function App() {
                 element={<MaterialsList />}
               />
               <Route
-                path="/inventory/:materialName"
+                path="/inventory/:materialId"
                 element={<SingleMaterial />}
               />
               <Route
@@ -84,7 +84,7 @@ function App() {
                 element={<SuppliersList />}
               />
               <Route
-                path="/suppliers/:supplierName"
+                path="/suppliers/:supplierId"
                 element={<SingleSupplier />}
               />
               <Route
