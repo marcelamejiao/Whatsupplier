@@ -13,7 +13,7 @@ import Signup from './pages/Signup';
 // import Home from './pages/Home';
 // import MaterialsList from './pages/MaterialsList'
 // import SingleMaterial from './pages/OneMaterial'
-// import SuppliersList from './pages/SuppliersList';
+import SuppliersList from './pages/SuppliersList';
 // import SingleSupplier from './pages/OneSupplier';
 // import Production from './pages/Production'
 import Navbar from './components/Navbar';
@@ -79,18 +79,21 @@ function App() {
                 path="/production"
                 element={<Production />}
               />
+              */}
               <Route
                 path="/suppliers"
                 element={<SuppliersList />}
               />
+              {/*
               <Route
                 path="/suppliers/:supplierId"
                 element={<SingleSupplier />}
-              /> */}
+              /> 
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
               />
+              */}
             </Routes>
           </div>
 
