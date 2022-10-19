@@ -49,15 +49,15 @@ function SuppliersList () {
         <h2>New Supplier Form</h2>
         <div className="form-group">
           <label for="exampleInputPassword1">Supplier's Name</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="ABC Company" />
         </div>
         <div className="form-group">
           <label for="exampleInputPassword1">Address</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Address" />
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="17 Street Sydney NSW 2000" />
         </div>
         <div className="form-group">
           <label for="exampleInputPassword1">Phone Number</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="+61 0450207635" />
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="+610450207635" />
         </div>
         <div className="form-group">
           <label for="exampleFormControlInput1">Email address</label>
@@ -71,12 +71,12 @@ function SuppliersList () {
           </select>
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Cost</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Cost" />
+          <label for="exampleInputPassword1">Cost ($)</label>
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="123" />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Lead Time</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Lead time in days" />
+          <label for="exampleInputPassword1">Lead Time (days)</label>
+          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="4" />
         </div>
         <Button type="submit" className="btn mb-2">Save</Button>
       </Form>
