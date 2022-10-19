@@ -1,15 +1,47 @@
 import React, { useState } from 'react';
 import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
-import { QUERY_SUPPLIERS } from '../utils/queries'; 
+import { QUERY_MATERIALS, QUERY_SUPPLIERS } from '../utils/queries'; 
 
 function SuppliersList () {
+
+  const [formState, setFormState] = useState({
+    name: '',
+    address: '',
+    phone: '',
+    email: ''
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+
+    console.log(formState);
+  };
 
   const [showTable, setShowTable] = useState(true);
   const [ showNewSupplierForm, setShowNewSupplierForm ] = useState(false);
 
-  const { supplierName } = useQuery(QUERY_SUPPLIERS);
-  const materialList = '';
+  // const { supplierName } = useQuery(QUERY_SUPPLIERS);
+    const { loading, error, data }  = useQuery(QUERY_MATERIALS);
+
+  if (loading) {
+    return 'Loading...';
+  }
+
+  if (error) {
+    return `Error! ${error.message}`;
+  }
+
+  const { materials } = data;
+
+  const materialList = materials.map(function(material){
+    return <option>{material.name}</option>
+  });
 
   function openNewSupplierForm() {
     setShowNewSupplierForm(true);
@@ -33,7 +65,7 @@ function SuppliersList () {
           </thead>
           <tbody>
             <tr>
-              <th scope="row">{supplierName}</th>
+              {/* <th scope="row">{supplierName}</th> */}
               <td></td>
             </tr>
           </tbody>
@@ -48,26 +80,25 @@ function SuppliersList () {
       <Form>
         <h2>New Supplier Form</h2>
         <div className="form-group">
-          <label for="exampleInputPassword1">Supplier's Name</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="ABC Company" />
+          <label for="name">Supplier's Name</label>
+          <input type="text" className="form-control" id="name" name="name" placeholder="ABC Company" onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Address</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="17 Street Sydney NSW 2000" />
+          <label for="address">Address</label>
+          <input type="text" className="form-control" id="address" name="address" placeholder="17 Street Sydney NSW 2000" onChange={handleChange}/>
         </div>
         <div className="form-group">
-          <label for="exampleInputPassword1">Phone Number</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="+610450207635" />
+          <label for="phone">Phone Number</label>
+          <input type="text" className="form-control" id="phone" name="phone" placeholder="+610450207635" onChange={handleChange}/>
         </div>
         <div className="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
-          <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+          <label for="email">Email address</label>
+          <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off"/>
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <label for="exampleFormControlSelect1">Material</label>
           <select className="form-control" id="exampleFormControlSelect1">
-            <option>{materialList}</option>
-            <option>2</option>
+            {materialList}
           </select>
         </div>
         <div className="form-group">
@@ -77,7 +108,7 @@ function SuppliersList () {
         <div className="form-group">
           <label for="exampleInputPassword1">Lead Time (days)</label>
           <input type="password" className="form-control" id="exampleInputPassword1" placeholder="4" />
-        </div>
+        </div> */}
         <Button type="submit" className="btn mb-2">Save</Button>
       </Form>
     )
