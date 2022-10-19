@@ -19,6 +19,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    companyName: {
+      type: String,
+      required: true,
+    },
+    companyDetails: {
+      type: String,
+      required: true,
+    },
     userMaterials: [userMaterialsSchema]
   },
 );
