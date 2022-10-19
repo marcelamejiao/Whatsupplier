@@ -45,6 +45,7 @@ const typeDefs = gql`
   type Query {
     suppliers: [Supplier]
     supplier(_id: ID!): Supplier
+    materials: [Material]
     me: User
   }
 
