@@ -21,15 +21,12 @@ function SuppliersList () {
       ...formState,
       [name]: value,
     });
-
-    console.log(formState);
   };
 
   const [showTable, setShowTable] = useState(true);
   const [ showNewSupplierForm, setShowNewSupplierForm ] = useState(false);
 
   const { loading: suppliersLoading, error: suppliersError, data: suppliersData } = useQuery(QUERY_SUPPLIERS);
-  // const { loading, error, data }  = useQuery(QUERY_MATERIALS);
 
   if (suppliersLoading) {
     return 'Loading...';
@@ -51,12 +48,6 @@ function SuppliersList () {
       </tr>
     );
   });
-
-  // const { materials } = data;
-
-  // const materialList = materials.map(function(material){
-  //   return <option scope="row">{material.name}</option>
-  // });
 
   function openNewSupplierForm() {
     setShowNewSupplierForm(true);
@@ -95,8 +86,7 @@ function SuppliersList () {
         </Table>
         <Button onClick={openNewSupplierForm}>New Supplier</Button>
       </>
-    ) : 
-    '';
+    ) : '';
 
   const newSupplierForm = showNewSupplierForm 
     ? (
