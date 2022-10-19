@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Supplier } = require('../models');
+const { User, Supplier, Material } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -9,6 +9,9 @@ const resolvers = {
     },
     supplier: async (parent, { supplierId }) => {
       return Supplier.findOne({ _id: supplierId });
+    },
+    materials: async () => {
+      return Material.find();
     },
     me: async (parent, args, context) => {
       if (context.user) {

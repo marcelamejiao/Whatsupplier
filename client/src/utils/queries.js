@@ -22,14 +22,14 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_SUPPLIERS = gql`
-    query getSuppliers{
-        suppliers{
-            _id
-            name
-            address
-            phone
-        }
-    }
+  query getSuppliers{
+      suppliers{
+        _id
+        name
+        address
+        phone
+      }
+  }
 `;
 
 export const QUERY_SINGLE_SUPPLIER = gql`
@@ -51,3 +51,11 @@ export const QUERY_SINGLE_SUPPLIER = gql`
   }
 `;
 
+export const QUERY_MATERIALS= gql`
+  query getMaterials {
+    materials {
+      _id
+      name
+    }
+  }
+`;
