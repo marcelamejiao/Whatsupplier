@@ -24,16 +24,16 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const ADD_SUPPLIER = gql`
-//   mutation addSupplier($name: String!, $email: String!, $address: String!, $phone: String!) {
-//     addSupplier(name: $name, email: $email, address: $address, phone: $phone) {
-//             name
-//             email
-//             address
-//             phone
-//         }
-//     }
-// `;
+export const ADD_SUPPLIER = gql`
+  mutation addSupplier($name: String!, $email: String!, $address: String!, $phone: String!) {
+    addSupplier(name: $name, email: $email, address: $address, phone: $phone) {
+            name
+            email
+            address
+            phone
+        }
+    }
+`;
 
 // export const UPDATE_SUPPLIER = gql`
 //     mutation UpdateSupplier($_id: ID! $name: String!, $email: String!, $address: String!, $phone: String!) {

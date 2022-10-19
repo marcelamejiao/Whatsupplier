@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Table, Form } from 'react-bootstrap';
-import { useQuery } from '@apollo/client';
-import { QUERY_MATERIALS, QUERY_SUPPLIERS } from '../utils/queries'; 
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_SUPPLIERS } from '../utils/queries';
+import { ADD_SUPPLIER } from '../utils/mutations'; 
 
 function SuppliersList () {
+  const [addSupplier] = useMutation(ADD_SUPPLIER);
 
   const [formState, setFormState] = useState({
     name: '',
@@ -26,26 +28,53 @@ function SuppliersList () {
   const [showTable, setShowTable] = useState(true);
   const [ showNewSupplierForm, setShowNewSupplierForm ] = useState(false);
 
-  // const { supplierName } = useQuery(QUERY_SUPPLIERS);
-    const { loading, error, data }  = useQuery(QUERY_MATERIALS);
+  const { loading: suppliersLoading, error: suppliersError, data: suppliersData } = useQuery(QUERY_SUPPLIERS);
+  // const { loading, error, data }  = useQuery(QUERY_MATERIALS);
 
-  if (loading) {
+  if (suppliersLoading) {
     return 'Loading...';
   }
 
-  if (error) {
-    return `Error! ${error.message}`;
+  if (suppliersError) {
+    return `Error! ${suppliersError.message}`;
   }
 
-  const { materials } = data;
+  const { suppliers } = suppliersData;
 
-  const materialList = materials.map(function(material){
-    return <option>{material.name}</option>
+  const supplierList = suppliers.map(function (supplier) {
+    return (
+      <tr>
+        <td>{supplier.name}</td>
+        <td>{supplier.address}</td>
+        <td>{supplier.phone}</td>
+        <td>{supplier.email}</td>
+      </tr>
+    );
   });
+
+  // const { materials } = data;
+
+  // const materialList = materials.map(function(material){
+  //   return <option scope="row">{material.name}</option>
+  // });
 
   function openNewSupplierForm() {
     setShowNewSupplierForm(true);
     setShowTable(false);
+  }
+
+  async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await addSupplier({
+        variables: { ...formState },
+      });
+
+      window.location.reload();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const supplierTable = showTable ?
@@ -58,16 +87,10 @@ function SuppliersList () {
               <th scope="col">Address</th>
               <th scope="col">Phone Number</th>
               <th scope="col">Email</th>
-              <th scope="col">Material</th>
-              <th scope="col">Material Cost</th>
-              <th scope="col">Lead Time</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {/* <th scope="row">{supplierName}</th> */}
-              <td></td>
-            </tr>
+            {supplierList}
           </tbody>
         </Table>
         <Button onClick={openNewSupplierForm}>New Supplier</Button>
@@ -77,7 +100,7 @@ function SuppliersList () {
 
   const newSupplierForm = showNewSupplierForm 
     ? (
-      <Form>
+      <Form onSubmit={handleFormSubmit}>
         <h2>New Supplier Form</h2>
         <div className="form-group">
           <label for="name">Supplier's Name</label>
@@ -95,20 +118,6 @@ function SuppliersList () {
           <label for="email">Email address</label>
           <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off"/>
         </div>
-        {/* <div className="form-group">
-          <label for="exampleFormControlSelect1">Material</label>
-          <select className="form-control" id="exampleFormControlSelect1">
-            {materialList}
-          </select>
-        </div>
-        <div className="form-group">
-          <label for="exampleInputPassword1">Cost ($)</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="123" />
-        </div>
-        <div className="form-group">
-          <label for="exampleInputPassword1">Lead Time (days)</label>
-          <input type="password" className="form-control" id="exampleInputPassword1" placeholder="4" />
-        </div> */}
         <Button type="submit" className="btn mb-2">Save</Button>
       </Form>
     )
