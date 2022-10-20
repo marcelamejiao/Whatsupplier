@@ -3,6 +3,7 @@ import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
 import { ADD_SUPPLIER } from '../utils/mutations'; 
+import { Link } from 'react-router-dom';
 
 function SuppliersList () {
   const [addSupplier] = useMutation(ADD_SUPPLIER);
@@ -41,7 +42,13 @@ function SuppliersList () {
   const supplierList = suppliers.map(function (supplier) {
     return (
       <tr>
-        <td>{supplier.name}</td>
+        <td>
+          <Link
+            to={`/suppliers/${supplier._id}`}
+          >
+            {supplier.name}
+          </Link>
+          </td>
         <td>{supplier.address}</td>
         <td>{supplier.phone}</td>
         <td>{supplier.email}</td>
