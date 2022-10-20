@@ -59,21 +59,22 @@ export const DELETE_SUPPLIER = gql`
     }
 `;
 
-// export const UPDATE_USER_MATERIAL = gql`
-//     mutation updateUserMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int! {
-//         updateUserMaterial(_id: $id, name: $name, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
-//             userMaterials {
-//                 material {
-//                   name
-//                 }
-//                 stock
-//                 safetyStock
-//                 anticipatedDemand
-//             }
+export const UPDATE_USER_MATERIAL = gql`
+    mutation updateUserMaterial($_id: ID!, $materialId: ID!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int! {
+        updateUserMaterial(_id: $id, materialId: $materialId, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
+            userMaterials {
+                material {
+                  _id
+                  name
+                }
+                stock
+                safetyStock
+                anticipatedDemand
+            }
             
-//         }
-//     }
-// `;
+        }
+    }
+`;
 
 export const UPDATE_SUPPLIER_MATERIAL = gql`
     mutation updateSupplierMaterial($_id: ID!, $materialId: ID!, $cost: Float!, $leadTime: Int!) {
