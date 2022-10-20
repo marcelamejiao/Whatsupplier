@@ -150,13 +150,6 @@ function SingleSupplier () {
       </div>
     </div>
   );
-
-  // const { supplier } = data.supplier;
-  // // const { materials } = data;
-
-  // // const materialList = materials.map(function(material){
-  // //   return <option scope="row">{material.name}</option>
-  // // });
 }
 
 export default SingleSupplier;
