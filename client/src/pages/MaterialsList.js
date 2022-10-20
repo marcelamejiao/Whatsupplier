@@ -91,6 +91,7 @@ const MaterialsList = () => {
     }
 
     console.log(materialData)
+    const {materials} = materialData
     const addInventoryForm = showNewMaterialForm
         ? (
             <Form onSubmit={handleFormSubmit}>
@@ -98,9 +99,10 @@ const MaterialsList = () => {
                 <div className="form-group">
                     <label for="name">Name</label>
                     <select>
-                        <option value="1">test1</option>
+                    {materials.map(item=>{ return <option value={item._id}>{item.name}</option>})}
+                        {/* <option value="1">test1</option>
                         <option value="2">test2</option>
-                        <option value="3">test3</option>
+                        <option value="3">test3</option> */}
                     </select>
                 </div>
                 <div className="form-group">
