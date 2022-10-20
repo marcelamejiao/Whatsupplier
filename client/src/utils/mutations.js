@@ -48,7 +48,7 @@ export const UPDATE_SUPPLIER = gql`
 `;
 
 export const DELETE_SUPPLIER = gql`
-    mutation deleteSupplier($_id: _id) {
+    mutation deleteSupplier($_id: ID!) {
         deleteSupplier(_id: $_id) {
             _id
             name

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SINGLE_SUPPLIER } from '../utils/queries';
@@ -8,12 +8,11 @@ import { UPDATE_SUPPLIER, UPDATE_SUPPLIER_MATERIAL, DELETE_SUPPLIER} from '../ut
 
 function SingleSupplier () {
   const { supplierId } = useParams();
-
-  console.log(supplierId);
+  const navigate = useNavigate();
 
   // const [updateSupplier] = useMutation(UPDATE_SUPPLIER);
   // const [updateSupplierMaterial] = useMutation(UPDATE_SUPPLIER_MATERIAL);
-  // const [deleteSupplier] = useMutation(DELETE_SUPPLIER);
+  const [deleteSupplier] = useMutation(DELETE_SUPPLIER);
 
   const { loading, error, data } = useQuery(QUERY_SINGLE_SUPPLIER, {
     variables: {
@@ -32,6 +31,19 @@ function SingleSupplier () {
   const { supplier } = data;
   console.log(supplier);
 
+  const handleDeleteSupplier = async () => {
+    try {
+      await deleteSupplier({
+        variables: {_id: supplierId},
+      });
+      navigate('/suppliers');
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   return (
     <div className="card" style={{width: '18rem'}}>
       <div className="card-body">
@@ -44,9 +56,24 @@ function SingleSupplier () {
       </ul>
       <div className="card-body">
         <a href="#" className="btn btn-primary">Modify</a>
-        <a href="#" className="btn btn-primary">Delete</a>
+        <Button onClick={handleDeleteSupplier}>Delete</Button>
       </div>
+
+      <Table className="table">
+      <thead className="thead-dark">
+        <tr>
+          <th scope="col">Material</th>
+          <th scope="col">Cost</th>
+          <th scope="col">Lead Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {}
+      </tbody>
+      </Table>
+      <Button onClick={''}>New Supplier</Button>
     </div>
+
   );
 
   // const { supplier } = data.supplier;
