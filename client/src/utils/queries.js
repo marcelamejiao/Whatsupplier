@@ -28,6 +28,7 @@ export const QUERY_SUPPLIERS = gql`
         name
         address
         phone
+        email
       }
   }
 `;
