@@ -76,13 +76,14 @@ export const DELETE_SUPPLIER = gql`
 // `;
 
 export const UPDATE_SUPPLIER_MATERIAL = gql`
-    mutation updateSupplierMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int!) {
-        updateSupplierMaterial(_id: $id, materialId: $materialId, cost: $cost, leadTime: $leadTime) {
+    mutation updateSupplierMaterial($_id: ID!, $materialId: ID!, $cost: Float!, $leadTime: Int!) {
+        updateSupplierMaterial(_id: $_id, materialId: $materialId, cost: $cost, leadTime: $leadTime) {
             _id
             name
             supplierMaterials{
-                material{
-                    materialId
+                material {
+                    _id
+                    name
                 }
                 cost
                 leadTime
