@@ -60,11 +60,11 @@ export const ADD_SUPPLIER = gql`
 // `;
 
 export const UPDATE_USER_MATERIAL = gql`
-    mutation updateUserMaterial($materialId: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int! ){
-        updateUserMaterial(materialId: $materialId, name: $name, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
+    mutation updateUserMaterial($_id: ID!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int!){
+        updateUserMaterial(_id: $_id, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
             userMaterials {
                 material {
-                  name
+                    _id
                 }
                 stock
                 safetyStock
