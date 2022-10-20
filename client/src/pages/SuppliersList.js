@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 
 function SuppliersList () {
   const [addSupplier] = useMutation(ADD_SUPPLIER);
+  
+  // Force reloading the suppliers when visiting the page.
+  useEffect(() => {
+    const fetchFunc = async () => await refetch();
+    fetchFunc();
+  },[]);
 
   const [formState, setFormState] = useState({
     name: '',
@@ -27,7 +33,7 @@ function SuppliersList () {
   const [showTable, setShowTable] = useState(true);
   const [ showNewSupplierForm, setShowNewSupplierForm ] = useState(false);
 
-  const { loading: suppliersLoading, error: suppliersError, data: suppliersData } = useQuery(QUERY_SUPPLIERS);
+  const { loading: suppliersLoading, error: suppliersError, data: suppliersData, refetch } = useQuery(QUERY_SUPPLIERS);
 
   if (suppliersLoading) {
     return 'Loading...';
@@ -70,6 +76,7 @@ function SuppliersList () {
       });
 
       window.location.reload();
+      // TODO: separate path
     } catch (e) {
       console.error(e);
     }
