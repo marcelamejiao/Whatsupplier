@@ -14,7 +14,7 @@ import Home from './pages/Home';
 // import MaterialsList from './pages/MaterialsList'
 // import SingleMaterial from './pages/OneMaterial'
 import SuppliersList from './pages/SuppliersList';
-// import SingleSupplier from './pages/OneSupplier';
+import SingleSupplier from './pages/SingleSupplier';
 // import Production from './pages/Production'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -72,6 +72,7 @@ function App() {
                 path="/inventory"
                 element={<MaterialsList />}
               />
+              
               <Route
                 path="/inventory/:materialId"
                 element={<SingleMaterial />}
@@ -85,19 +86,16 @@ function App() {
                 path="/suppliers"
                 element={<SuppliersList />}
               />
-              {/*
               <Route
                 path="/suppliers/:supplierId"
                 element={<SingleSupplier />}
-              /> 
+              />
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
               />
-              */}
             </Routes>
           </div>
-
           <Footer />
         </>
       </Router>
