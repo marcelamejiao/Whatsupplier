@@ -84,7 +84,7 @@ const resolvers = {
 
     updateUserMaterial: async (parent, { _id, materialId, stock, safetyStock, anticipatedDemand } , context) => {
       await User.findOneAndUpdate(
-        { _id: _id },
+        { _id: context.user._id },
         {
           $pull: { userMaterials: { material: materialId } },
         },
@@ -92,7 +92,7 @@ const resolvers = {
       );
 
       return await User.findOneAndUpdate(
-        { _id: _id },
+        { _id: context.user._id },
         {
           $addToSet: { userMaterials: { material: materialId, stock, safetyStock, anticipatedDemand } }
         },

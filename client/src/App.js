@@ -11,7 +11,7 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
-// import MaterialsList from './pages/MaterialsList'
+import MaterialsList from './pages/MaterialsList'
 // import SingleMaterial from './pages/OneMaterial'
 import SuppliersList from './pages/SuppliersList';
 // import SingleSupplier from './pages/OneSupplier';
@@ -67,16 +67,16 @@ function App() {
                 path="/home"
                 element={<Home />}
               />
-              {/* 
+              
               <Route
                 path="/inventory"
                 element={<MaterialsList />}
               />
-              <Route
+              {/* <Route
                 path="/inventory/:materialId"
                 element={<SingleMaterial />}
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="/production"
                 element={<Production />}
               />
