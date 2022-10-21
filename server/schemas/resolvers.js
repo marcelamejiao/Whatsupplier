@@ -15,7 +15,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate('userMaterials.material');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -82,19 +82,19 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
 
-    updateUserMaterial: async (parent, { _id, materialId, stock, safetyStock, anticipatedDemand } , context) => {
+    updateUserMaterial: async (parent, {_id, stock, safetyStock, anticipatedDemand } , context) => {
       await User.findOneAndUpdate(
-        { _id: _id },
+        { _id: context.user._id },
         {
-          $pull: { userMaterials: { material: materialId } },
+          $pull: { userMaterials: { material: _id } },
         },
         { new: true, runValidators: true }
       );
 
       return await User.findOneAndUpdate(
-        { _id: _id },
+        { _id: context.user._id },
         {
-          $addToSet: { userMaterials: { material: materialId, stock, safetyStock, anticipatedDemand } }
+          $addToSet: { userMaterials: { material: _id, stock, safetyStock, anticipatedDemand } }
         },
         { new: true, runValidators: true }
       )

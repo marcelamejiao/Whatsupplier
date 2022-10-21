@@ -59,21 +59,21 @@ export const ADD_SUPPLIER = gql`
 //     }
 // `;
 
-// export const UPDATE_USER_MATERIAL = gql`
-//     mutation updateUserMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int! {
-//         updateUserMaterial(_id: $id, name: $name, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
-//             userMaterials {
-//                 material {
-//                   name
-//                 }
-//                 stock
-//                 safetyStock
-//                 anticipatedDemand
-//             }
+export const UPDATE_USER_MATERIAL = gql`
+    mutation updateUserMaterial($_id: ID!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int!){
+        updateUserMaterial(_id: $_id, stock: $stock, safetyStock: $safetyStock, anticipatedDemand: $anticipatedDemand) {
+            userMaterials {
+                material {
+                    _id
+                }
+                stock
+                safetyStock
+                anticipatedDemand
+            }
             
-//         }
-//     }
-// `;
+        }
+    }
+`;
 
 // export const UPDATE_SUPPLIER_MATERIAL = gql`
 //     mutation updateSupplierMaterial($id: ID!, $name: String!, $stock: Int!, $safetyStock: Int!, $anticipatedDemand: Int!) {
