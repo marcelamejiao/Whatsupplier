@@ -16,7 +16,7 @@ import MaterialsList from './pages/MaterialsList'
 import SingleMaterial from './pages/SingleMaterial'
 import SuppliersList from './pages/SuppliersList';
 import SingleSupplier from './pages/SingleSupplier';
-// import Production from './pages/Production'
+import Production from './pages/Production'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -78,11 +78,10 @@ function App() {
                 path="/inventory/:materialId"
                 element={<SingleMaterial />}
               />
-              {/* <Route
+              <Route
                 path="/production"
-                element={<Production />}
+                element={<Production />} */}
               />
-              */}
               <Route
                 path="/suppliers"
                 element={<SuppliersList />}
