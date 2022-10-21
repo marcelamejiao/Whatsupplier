@@ -10,6 +10,14 @@ function SingleSupplier () {
   const { supplierId } = useParams();
   const navigate = useNavigate();
 
+  const [supplierFormState, setSupplierFormState] = useState({
+    _id: '',
+    name: '',
+    address: '',
+    phone: '',
+    email: '',
+  });
+
   const [materialsFormState, setMaterialsFormState] = useState({
     _id: supplierId,
     materialId: '',
@@ -26,7 +34,7 @@ function SingleSupplier () {
     });
   };
 
-  // const [updateSupplier] = useMutation(UPDATE_SUPPLIER);
+  const [updateSupplier] = useMutation(UPDATE_SUPPLIER);
   const [updateSupplierMaterial] = useMutation(UPDATE_SUPPLIER_MATERIAL);
   const [deleteSupplier] = useMutation(DELETE_SUPPLIER);
 
@@ -47,6 +55,25 @@ function SingleSupplier () {
 
   const { supplier } = data;
 
+  if (supplierFormState._id === '') {
+    setSupplierFormState({
+      _id: supplier._id,
+      name: supplier.name,
+      address: supplier.address,
+      phone: supplier.phone,
+      email: supplier.email
+    });
+  }
+
+  const handleSupplierChange = (event) => {
+    const { name, value } = event.target;
+
+    setSupplierFormState({
+      ...supplierFormState,
+      [name]: value,
+    });
+  };
+
   if (materialLoading) {
     return 'Loading...';
   }
@@ -59,7 +86,7 @@ function SingleSupplier () {
 
   const materialsList = materials.map(function (material) {
     return (
-      <option value={material._id}>{material.name}</option>
+      <option key={material._id} value={material._id}>{material.name}</option>
     );
   });
 
@@ -104,21 +131,35 @@ function SingleSupplier () {
     }
   };
 
+  const handleUpdateSupplierFormSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await updateSupplier({
+        variables: {...supplierFormState},
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className='row'>
       <div className="card col-6" style={{width: '18rem'}}>
-        <div className="card-body">
-          <h5 className="card-title">{supplier.name}</h5>
-        </div>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">{supplier.address}</li>
-          <li className="list-group-item">{supplier.phone}</li>
-          <li className="list-group-item">{supplier.email}</li>
-        </ul>
-        <div className="card-body">
-          <a href="#" className="btn btn-primary">Modify</a>
-          <Button onClick={handleDeleteSupplier}>Delete</Button>
-        </div>
+        <Form onSubmit={handleUpdateSupplierFormSubmit}>
+          <div className="card-header">
+            <h5 className="card-title"><input name='name' value={supplierFormState.name} onChange={handleSupplierChange} /></h5>
+          </div>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item"><input name='address' value={supplierFormState.address} onChange={handleSupplierChange} /></li>
+            <li className="list-group-item"><input name='phone' value={supplierFormState.phone} onChange={handleSupplierChange} /></li>
+            <li className="list-group-item"><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
+          </ul>
+          <div className="card-body">
+            <Button type='submit'>Modify</Button>
+            <Button onClick={handleDeleteSupplier}>Delete</Button>
+          </div>        
+        </Form>
       </div>
       <div className='col-6'>
         <Table className="table">
@@ -135,14 +176,14 @@ function SingleSupplier () {
         </Table>
         <Form onSubmit={handleAddMaterialFormSubmit} className="p-2">
           <div className="form-group">
-            <label for="materials">Materials</label>
-            <select className="form-control" id="materials" name='materialId' required onChange={handleMaterialChange}>
-              <option value="" disabled selected>--Please select a material--</option>
+            <label htmlFor="materials">Materials</label>
+            <select className="form-control" id="materials" name='materialId' required defaultValue={""} onChange={handleMaterialChange}>
+              <option value="" disabled>--Please select a material--</option>
               {materialsList}
             </select>
-            <label for="cost">Cost:</label>
+            <label htmlFor="cost">Cost:</label>
             <input className="form-control" id="cost" name='cost' type='number' step={`0.01`} required onChange={handleMaterialChange} />
-            <label for="leadTime">Lead Time (days):</label>
+            <label htmlFor="leadTime">Lead Time (days):</label>
             <input className="form-control" id='leadTime' name='leadTime' type='number' required onChange={handleMaterialChange}/>
           </div>
           <Button type='submit' className="btn">Add to Supplier</Button>
