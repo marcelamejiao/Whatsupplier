@@ -141,11 +141,11 @@ function SingleSupplier () {
               {materialsList}
             </select>
             <label for="cost">Cost:</label>
-            <input className="form-control" id="cost" name='cost' type='number' required onChange={handleMaterialChange} />
-            <label for="leadTime">Lead Time:</label>
+            <input className="form-control" id="cost" name='cost' type='number' step={`0.01`} required onChange={handleMaterialChange} />
+            <label for="leadTime">Lead Time (days):</label>
             <input className="form-control" id='leadTime' name='leadTime' type='number' required onChange={handleMaterialChange}/>
           </div>
-          <Button type='submit' className="btn">Add to this Supplier</Button>
+          <Button type='submit' className="btn">Add to Supplier</Button>
         </Form>
       </div>
     </div>
