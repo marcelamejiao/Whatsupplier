@@ -140,6 +140,7 @@ function SingleSupplier () {
         variables: {...supplierFormState},
       });
       NotificationManager.success('Your Supplier has been updated', 'Notification');
+      
     } catch (e) {
       console.error(e);
     }
@@ -160,6 +161,7 @@ function SingleSupplier () {
           <div className="card-body">
             <Button type='submit'>Save</Button>
             <Button onClick={handleDeleteSupplier}>Delete</Button>
+            <NotificationContainer/>
           </div>        
         </Form>
       </div>
