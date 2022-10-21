@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-notifications/lib/notifications.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,

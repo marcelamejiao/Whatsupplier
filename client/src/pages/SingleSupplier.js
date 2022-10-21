@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
@@ -138,6 +139,7 @@ function SingleSupplier () {
       await updateSupplier({
         variables: {...supplierFormState},
       });
+      NotificationManager.success('Your Supplier has been updated', 'Notification');
     } catch (e) {
       console.error(e);
     }
@@ -156,7 +158,7 @@ function SingleSupplier () {
             <li className="list-group-item"><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
           </ul>
           <div className="card-body">
-            <Button type='submit'>Modify</Button>
+            <Button type='submit'>Save</Button>
             <Button onClick={handleDeleteSupplier}>Delete</Button>
           </div>        
         </Form>
