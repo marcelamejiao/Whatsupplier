@@ -40,6 +40,7 @@ export const QUERY_SINGLE_SUPPLIER = gql`
       name
       address
       phone
+      email
       supplierMaterials{
         material{
             _id

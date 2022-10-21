@@ -7,8 +7,8 @@ const resolvers = {
     suppliers: async () => {
       return Supplier.find();
     },
-    supplier: async (parent, { supplierId }) => {
-      return Supplier.findOne({ _id: supplierId });
+    supplier: async (parent, { _id }) => {
+      return Supplier.findOne({ _id: _id }).populate('supplierMaterials.material');
     },
     materials: async () => {
       return Material.find();

@@ -1,18 +1,19 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME, QUERY_MATERIALS } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
+import { Link } from 'react-router-dom';
 
 const MaterialsList = () => {
     const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
     const { loading: materialLoading, error: materialError, data: materialData } = useQuery(QUERY_MATERIALS);
-    const { loading: userLoading, error: userError, data: userData, refetch} = useQuery(QUERY_ME);
+    const { loading: userLoading, error: userError, data: userData, refetch } = useQuery(QUERY_ME);
 
     useEffect(() => {
         const fetchFunc = async () => await refetch();
         fetchFunc();
-      }, []);
+    }, []);
 
     const [formState, setFormState] = useState({
         materialId: '',
@@ -28,7 +29,7 @@ const MaterialsList = () => {
             ...formState,
             [name]: value,
         });
-        console.log("setFormState",formState )
+        console.log("setFormState", formState)
     };
     const openNewMaterialForm = () => {
         setShowNewMaterialForm(true);
@@ -46,13 +47,14 @@ const MaterialsList = () => {
     }
     const { me } = userData;
 
-    const userMaterialsList = me?.userMaterials?.map((userMaterial) => {
+    const userMaterialsList = me?.userMaterials?.map((userMaterial, index) => {
         return (
-            <tr>
+            <tr key={index}>
                 <td>{userMaterial.material.name}</td>
                 <td>{userMaterial.stock}</td>
                 <td>{userMaterial.safetyStock}</td>
                 <td>{userMaterial.anticipatedDemand}</td>
+                <button><Link to={`/inventory/:${userMaterial.material._id}`}>Update</Link></button>
             </tr>
         );
     })
@@ -80,12 +82,12 @@ const MaterialsList = () => {
         event.preventDefault();
         try {
             await updateUserMaterial({
-                variables: { 
+                variables: {
                     _id: formState.materialId,
                     stock: parseInt(formState.stock),
                     safetyStock: parseInt(formState.safetyStock),
                     anticipatedDemand: parseInt(formState.anticipatedDemand)
-                 },
+                },
             });
             window.location.reload();
         } catch (e) {
@@ -99,27 +101,27 @@ const MaterialsList = () => {
     if (materialError) {
         return `Error! ${materialError.message}`;
     }
-    const {materials} = materialData
+    const { materials } = materialData
     const addInventoryForm = showNewMaterialForm
         ? (
             <Form onSubmit={handleFormSubmit}>
                 <h2>New Inventory Form</h2>
                 <div className="form-group">
-                    <label for="name">Please Select the material</label>  
+                    <label htmlFor="name">Please Select the material</label>
                     <select name="materialId" onChange={handleChange} >
-                    {materials.map(item=>{ return <option value={item._id}>{item.name}</option>})}
+                        {materials.map((item, index) => { return <option key={index} value={item._id}>{item.name}</option> })}
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="stock">Stock</label>
+                    <label htmlFor="stock">Stock</label>
                     <input type="number" className="form-control" name="stock" placeholder="100" min="0" onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                    <label for="safetyStock">Safety Stock</label>
+                    <label htmlFor="safetyStock">Safety Stock</label>
                     <input type="number" className="form-control" name="safetyStock" placeholder="100" min="0" onChange={handleChange} />
                 </div>
                 <div className="form-group">
-                    <label for="anticipatedDemand">Anticipated Demand</label>
+                    <label htmlFor="anticipatedDemand">Anticipated Demand</label>
                     <input type="number" className="form-control" name="anticipatedDemand" placeholder="100" min="0" onChange={handleChange} autoComplete="off" />
                 </div>
                 <Button type="submit" className="btn mb-2">Save</Button>

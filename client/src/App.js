@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-notifications/lib/notifications.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -12,9 +13,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import MaterialsList from './pages/MaterialsList'
-// import SingleMaterial from './pages/OneMaterial'
+import SingleMaterial from './pages/SingleMaterial'
 import SuppliersList from './pages/SuppliersList';
-// import SingleSupplier from './pages/OneSupplier';
+import SingleSupplier from './pages/SingleSupplier';
 // import Production from './pages/Production'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -72,10 +73,11 @@ function App() {
                 path="/inventory"
                 element={<MaterialsList />}
               />
-              {/* <Route
+              
+              <Route
                 path="/inventory/:materialId"
                 element={<SingleMaterial />}
-              /> */}
+              />
               {/* <Route
                 path="/production"
                 element={<Production />}
@@ -85,19 +87,16 @@ function App() {
                 path="/suppliers"
                 element={<SuppliersList />}
               />
-              {/*
               <Route
                 path="/suppliers/:supplierId"
                 element={<SingleSupplier />}
-              /> 
+              />
               <Route
                 path='*'
                 element={<h1 className='display-2'>Wrong page!</h1>}
               />
-              */}
             </Routes>
           </div>
-
           <Footer />
         </>
       </Router>
