@@ -50,6 +50,7 @@ const typeDefs = gql`
     materials: [Material]
     me: User
     cheapestSupplier(materialId: ID!): Supplier
+    reorderPoint(supplierId: ID!, materialId: ID!): Int
   }
 
   type Mutation {

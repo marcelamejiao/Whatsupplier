@@ -45,6 +45,31 @@ const resolvers = {
 
       // Return the cheapest to the front-end
       return suppliers[0];
+    },
+    reorderPoint: async (parent, { supplierId, materialId }, context) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id }).populate('userMaterials.material');
+        const userMaterials = user.userMaterials;
+        const userMaterial = userMaterials.find((userMaterial) => {
+          return userMaterial.material._id == materialId
+        });
+
+        const supplier = await Supplier.findOne({ _id: supplierId }).populate('supplierMaterials.material');
+        const supplierMaterials = supplier.supplierMaterials;
+        const supplierMaterial = supplierMaterials.find((supplierMaterial) => {
+          return supplierMaterial.material._id == materialId;
+        });
+
+        const safetyStock = userMaterial.safetyStock;
+        const anticipatedDemand = userMaterial.anticipatedDemand;
+        const leadTime = supplierMaterial.leadTime;
+
+        // Re-Order Point = Anticipated Demand x Lead Time + Safety Stock
+        const reorderPoint = (anticipatedDemand * leadTime) + safetyStock;
+        return reorderPoint;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     }
   },
 
