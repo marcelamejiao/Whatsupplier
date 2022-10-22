@@ -93,6 +93,10 @@ function App() {
                   element={<SingleMaterial />}
                 />
                 <Route
+                  path="/materials/:materialId/send-to-production"
+                  element={<SendMaterialToProduction />}
+                />
+                <Route
                 path="/production"
                 element={<Production />}
                 />
