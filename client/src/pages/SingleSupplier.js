@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Table, Form } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SINGLE_SUPPLIER, QUERY_MATERIALS } from '../utils/queries';
-import { UPDATE_SUPPLIER, UPDATE_SUPPLIER_MATERIAL, DELETE_SUPPLIER} from '../utils/mutations';
+import { UPDATE_SUPPLIER, UPDATE_SUPPLIER_MATERIAL, DELETE_SUPPLIER } from '../utils/mutations';
+import { EditContainer, MaterialContainer, SupplierContainer } from '../components/styles/SingleSupplier.styled'
+import { Modal, Footer, Container } from '../components/styles/SupplierLists.styled'
 
 
-function SingleSupplier () {
+function SingleSupplier() {
   const { supplierId } = useParams();
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ function SingleSupplier () {
   const [updateSupplierMaterial] = useMutation(UPDATE_SUPPLIER_MATERIAL);
   const [deleteSupplier] = useMutation(DELETE_SUPPLIER);
 
-  const { loading: materialLoading, error: materialError, data: materialData} = useQuery(QUERY_MATERIALS);
+  const { loading: materialLoading, error: materialError, data: materialData } = useQuery(QUERY_MATERIALS);
   const { loading, error, data } = useQuery(QUERY_SINGLE_SUPPLIER, {
     variables: {
       _id: supplierId,
@@ -92,8 +94,6 @@ function SingleSupplier () {
   });
 
   const supplierMaterialList = supplier.supplierMaterials.map(function (supplierMaterial) {
-    console.log(supplierMaterial);
-    
     return (
       <tr>
         <td>{supplierMaterial.material.name}</td>
@@ -106,7 +106,7 @@ function SingleSupplier () {
   const handleDeleteSupplier = async () => {
     try {
       await deleteSupplier({
-        variables: {_id: supplierId},
+        variables: { _id: supplierId },
       });
       navigate('/suppliers');
 
@@ -137,63 +137,71 @@ function SingleSupplier () {
 
     try {
       await updateSupplier({
-        variables: {...supplierFormState},
+        variables: { ...supplierFormState },
       });
       NotificationManager.success('Your Supplier has been updated', 'Notification');
-      
+
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <div className='row'>
-      <div className="card col-6" style={{width: '18rem'}}>
-        <Form onSubmit={handleUpdateSupplierFormSubmit}>
-          <div className="card-header">
-            <h5 className="card-title"><input name='name' value={supplierFormState.name} onChange={handleSupplierChange} /></h5>
-          </div>
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item"><input name='address' value={supplierFormState.address} onChange={handleSupplierChange} /></li>
-            <li className="list-group-item"><input name='phone' value={supplierFormState.phone} onChange={handleSupplierChange} /></li>
-            <li className="list-group-item"><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
-          </ul>
-          <div className="card-body">
-            <Button type='submit'>Save</Button>
-            <Button onClick={handleDeleteSupplier}>Delete</Button>
-            <NotificationContainer/>
-          </div>        
-        </Form>
-      </div>
-      <div className='col-6'>
-        <Table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Material</th>
-              <th scope="col">Cost</th>
-              <th scope="col">Lead Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {supplierMaterialList}
-          </tbody>
-        </Table>
-        <Form onSubmit={handleAddMaterialFormSubmit} className="p-2">
-          <div className="form-group">
-            <label htmlFor="materials">Materials</label>
-            <select className="form-control" id="materials" name='materialId' required defaultValue={""} onChange={handleMaterialChange}>
-              <option value="" disabled>--Please select a material--</option>
-              {materialsList}
-            </select>
-            <label htmlFor="cost">Cost:</label>
-            <input className="form-control" id="cost" name='cost' type='number' step={`0.01`} required onChange={handleMaterialChange} />
-            <label htmlFor="leadTime">Lead Time (days):</label>
-            <input className="form-control" id='leadTime' name='leadTime' type='number' required onChange={handleMaterialChange}/>
-          </div>
-          <Button type='submit' className="btn">Add to Supplier</Button>
-        </Form>
-      </div>
-    </div>
+    <EditContainer>
+      <SupplierContainer>
+      <h2>Update Supplier</h2>
+        <Modal>
+          <Form onSubmit={handleUpdateSupplierFormSubmit}>
+            <div className="card-header" >
+              <h5 className="card-title"><p>Name</p><input name='name' value={supplierFormState.name} onChange={handleSupplierChange} /></h5>
+            </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item"><p>Address</p><input name='address' value={supplierFormState.address} onChange={handleSupplierChange} /></li>
+              <li className="list-group-item"><p>Phone</p><input name='phone' value={supplierFormState.phone} onChange={handleSupplierChange} /></li>
+              <li className="list-group-item"><p>Email</p><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
+            </ul>
+            <Footer>
+              <button type='submit' className="btn mt-2 mb-2 btn-outline-secondary" onClick={handleUpdateSupplierFormSubmit}>Save</button>
+              <button className="btn mt-2 mb-2 btn-outline-secondary" onClick={handleDeleteSupplier}>Delete</button>
+              <NotificationContainer />
+            </Footer>
+          </Form>
+        </Modal>
+      </SupplierContainer>
+      <MaterialContainer>
+      <h2>Update Supplier's Materials</h2>
+        <Container>
+          <Table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Material</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Lead Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {supplierMaterialList}
+            </tbody>
+          </Table>
+          <Modal>
+            <Form onSubmit={handleAddMaterialFormSubmit} className="p-2">
+              <div className="form-group">
+                <label htmlFor="materials">Materials</label>
+                <select className="form-control" id="materials" name='materialId' required defaultValue={""} onChange={handleMaterialChange}>
+                  <option value="" disabled>--Please select a material--</option>
+                  {materialsList}
+                </select>
+                <label htmlFor="cost">Cost:</label>
+                <input className="form-control" id="cost" name='cost' type='number' step={`0.01`} required onChange={handleMaterialChange} />
+                <label htmlFor="leadTime">Lead Time (days):</label>
+                <input className="form-control" id='leadTime' name='leadTime' type='number' required onChange={handleMaterialChange} />
+              </div>
+              <button type='submit' className="btn mb-2 btn-outline-secondary" onClick={handleAddMaterialFormSubmit}>Add material to Supplier</button>
+            </Form>
+          </Modal>
+        </Container>
+      </MaterialContainer>
+    </EditContainer>
   );
 }
 

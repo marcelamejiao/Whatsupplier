@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { LoginContainer } from '../components/styles/Login';
+import { LoginContainer } from '../components/styles/Login.styled';
 import loginImage from '../images/Webdesign-outils-gratuits.png'
 
 const Login = (props) => {

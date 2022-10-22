@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
 import { ADD_SUPPLIER } from '../utils/mutations';
 import { Link } from 'react-router-dom';
-import { Container, Header, Modal, Footer } from '../components/styles/SupplierLists';
+import { Container, Header, Modal, Footer,NameLink } from '../components/styles/SupplierLists.styled';
 
 function SuppliersList() {
   const [addSupplier] = useMutation(ADD_SUPPLIER);
@@ -49,13 +49,13 @@ function SuppliersList() {
   const supplierList = suppliers.map(function (supplier) {
     return (
       <tr>
-        <td>
+        <NameLink>
           <Link
             to={`/suppliers/${supplier._id}`}
           >
             {supplier.name}
           </Link>
-        </td>
+        </NameLink>
         <td>{supplier.address}</td>
         <td>{supplier.phone}</td>
         <td>{supplier.email}</td>
@@ -126,7 +126,7 @@ function SuppliersList() {
           </div>
         </Form>
         <Footer>
-          <button type="submit" className="btn mb-2 btn-outline-secondary">Save</button>
+          <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={handleFormSubmit}>Save</button>
           <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={closeNewSupplierForm}>Close</button>
         </Footer>
       </Modal>

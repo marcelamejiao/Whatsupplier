@@ -33,18 +33,6 @@ export const LoginContainer = styled.div`
         }
     }
     @media (max-width: ${({ theme }) => theme.mobile}) {
-    flex-direction: column;
-    .card{
-       width: 100%; 
-    }    
-    img{
-        display:none;
-    }
-    form {
-        button{
-            margin-left: 10%;
-        }
-    }
-  
+    
   }
 `
