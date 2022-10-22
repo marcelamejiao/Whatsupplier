@@ -6,7 +6,6 @@ import logo from '../images/Whatsupplier.png'
 import Auth from '../utils/auth';
 
 const AppNavbar = () => {
-  // set modal display state
 
   return (
     <>
@@ -33,7 +32,7 @@ const AppNavbar = () => {
                   <Nav.Link as={Link} to='/production'>
                     PRODUCTION
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>
+                  <Nav.Link onClick={Auth.logout} >
                     LOGOUT
                   </Nav.Link>
                 </>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, Form } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME, QUERY_MATERIALS } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 import { Link } from 'react-router-dom';
+import { Container, Modal, Footer, Header, Button } from '../components/styles/MaterialLists.styled';
 
 const MaterialsList = () => {
     const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
@@ -35,6 +36,10 @@ const MaterialsList = () => {
         setShowNewMaterialForm(true);
         setShowTable(false);
     }
+    const closeNewMaterialForm = () => {
+        setShowNewMaterialForm(false);
+        setShowTable(true);
+    }
 
     const [showTable, setShowTable] = useState(true);
     const [showNewMaterialForm, setShowNewMaterialForm] = useState(false);
@@ -62,8 +67,8 @@ const MaterialsList = () => {
     const inventoryTable = showTable ?
         (
             <>
-                <Table className="table">
-                    <thead className="thead-dark">
+                <Table>
+                    <thead>
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Stock</th>
@@ -75,7 +80,6 @@ const MaterialsList = () => {
                         {userMaterialsList}
                     </tbody>
                 </Table>
-                <Button onClick={openNewMaterialForm}>Add A Material</Button>
             </>
         ) : '';
 
@@ -105,38 +109,45 @@ const MaterialsList = () => {
     const { materials } = materialData
     const addInventoryForm = showNewMaterialForm
         ? (
-            <Form onSubmit={handleFormSubmit}>
-                <h2>New Inventory Form</h2>
-                <div className="form-group">
-                    <label htmlFor="name">Please Select the material</label>
-                    <select name="materialId" onChange={handleChange} >
-                        {materials.map((item, index) => { return <option key={index} value={item._id}>{item.name}</option> })}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="stock">Stock</label>
-                    <input type="number" className="form-control" name="stock" placeholder="100" min="0" onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="safetyStock">Safety Stock</label>
-                    <input type="number" className="form-control" name="safetyStock" placeholder="100" min="0" onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="anticipatedDemand">Anticipated Demand</label>
-                    <input type="number" className="form-control" name="anticipatedDemand" placeholder="100" min="0" onChange={handleChange} autoComplete="off" />
-                </div>
-                <Button type="submit" className="btn mb-2">Save</Button>
-            </Form>
+            <Modal>
+                <Form onSubmit={handleFormSubmit}>
+                    <h2>Add a new material</h2>
+                    <div className="form-group">
+                        <label htmlFor="name">Please Select the material</label>
+                        <select name="materialId" onChange={handleChange} >
+                            {materials.map((item, index) => { return <option key={index} value={item._id}>{item.name}</option> })}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="stock">Stock</label>
+                        <input type="number" className="form-control" name="stock" placeholder="100" min="0" onChange={handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="safetyStock">Safety Stock</label>
+                        <input type="number" className="form-control" name="safetyStock" placeholder="100" min="0" onChange={handleChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="anticipatedDemand">Anticipated Demand</label>
+                        <input type="number" className="form-control" name="anticipatedDemand" placeholder="100" min="0" onChange={handleChange} autoComplete="off" />
+                    </div>
+                    <Footer>
+                        <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
+                        <Button type="button" onClick={closeNewMaterialForm}>Close</Button>
+                    </Footer>
+                </Form>
+            </Modal>
         )
         : '';
     return (
-        <div>
-            <section className='container'>
+        <Container>
+            <Header>
                 <h1>Inventory</h1>
-                {inventoryTable}
-                {addInventoryForm}
-            </section>
-        </div>
+                {showTable && <Button onClick={openNewMaterialForm}>Add A Material</Button>}
+            </Header>
+            {addInventoryForm}
+            {inventoryTable}
+        </Container>
+
     )
 }
 

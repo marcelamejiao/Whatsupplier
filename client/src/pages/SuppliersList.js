@@ -4,7 +4,8 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
 import { ADD_SUPPLIER } from '../utils/mutations';
 import { Link } from 'react-router-dom';
-import { Container, Header, Modal, Footer } from '../components/styles/SupplierLists';
+import { Container, Header, Modal, Footer } from '../components/styles/SupplierLists.styled';
+import { Button } from '../components/styles/MaterialLists.styled'
 
 function SuppliersList() {
   const [addSupplier] = useMutation(ADD_SUPPLIER);
@@ -124,11 +125,11 @@ function SuppliersList() {
             <label htmlFor="email">Email address</label>
             <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off" />
           </div>
-          <Footer>
-            <button type="submit" className="btn mb-2 btn-outline-secondary">Save</button>
-            <button type="button" className="btn mb-2 btn-outline-secondary" onClick={closeNewSupplierForm}>Close</button>
-          </Footer>
         </Form>
+        <Footer>
+          <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
+          <Button type="submit" onClick={closeNewSupplierForm}>Close</Button>
+        </Footer>
       </Modal>
     )
     : '';

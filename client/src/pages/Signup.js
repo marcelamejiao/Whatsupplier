@@ -5,7 +5,7 @@ import { ADD_USER } from '../utils/mutations';
 import SignUpImage from '../images/elements-web-design-opt.png'
 
 import Auth from '../utils/auth';
-import { SignupBody } from '../components/styles/Signup';
+import { SignupBody } from '../components/styles/Signup.styled';
 
 const Signup = () => {
   const [formState, setFormState] = useState({

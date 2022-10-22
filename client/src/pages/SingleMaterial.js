@@ -1,10 +1,11 @@
 
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
+import { Modal, Footer } from '../components/styles/SupplierLists.styled';
 
 const SingleMaterial = () => {
     const { materialId } = useParams();
@@ -39,10 +40,10 @@ const SingleMaterial = () => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-    
+
         setFormState({
-          ...formState,
-          [name]: value,
+            ...formState,
+            [name]: value,
         });
     };
 
@@ -63,9 +64,12 @@ const SingleMaterial = () => {
         }
     }
     return (
-        <div className='container'>
-            <h2><strong>Edit Inventory Item:</strong> {materialName}</h2>
+        <Modal>
             <Form onSubmit={handleFormSubmit}>
+                <h2>Update a material</h2>
+                <div className="form-group" >
+                    <label htmlFor="name">{materialName}</label>
+                </div>
                 <div className="form-group">
                     <label htmlFor="stock">Stock</label>
                     <input type="number" className="form-control" name="stock" value={formState.stock} min="0" onChange={handleChange} />
@@ -78,9 +82,12 @@ const SingleMaterial = () => {
                     <label htmlFor="anticipatedDemand">Anticipated Demand</label>
                     <input type="number" className="form-control" name="anticipatedDemand" value={formState.anticipatedDemand} min="0" onChange={handleChange} autoComplete="off" />
                 </div>
-                <Button type="submit" className="btn mb-2">Save</Button>
+                <Footer>
+                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={handleFormSubmit}>Save</button>
+                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={() => navigate('/inventory')}>Close</button>
+                </Footer>
             </Form>
-        </div>
+        </Modal>
 
     )
 }
