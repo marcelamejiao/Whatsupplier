@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import logo from '../images/Whatsupplier.png'
 
 import Auth from '../utils/auth';
 
@@ -9,10 +10,10 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar style={{ backgroundColor: "#3d84a8", height:"20%"}} variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            WhatSupplier
+            <img src={logo} alt='logo' style={{ width: '88px' }} />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar'>

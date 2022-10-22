@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Table, Form } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
-import { ADD_SUPPLIER } from '../utils/mutations'; 
+import { ADD_SUPPLIER } from '../utils/mutations';
 import { Link } from 'react-router-dom';
+import { Container, Header, Modal, Footer } from '../components/styles/SupplierLists';
 
-function SuppliersList () {
+function SuppliersList() {
   const [addSupplier] = useMutation(ADD_SUPPLIER);
-  
+
   // Force reloading the suppliers when visiting the page.
   useEffect(() => {
     const fetchFunc = async () => await refetch();
     fetchFunc();
-  },[]);
+  }, []);
 
   const [formState, setFormState] = useState({
     name: '',
@@ -31,7 +32,7 @@ function SuppliersList () {
   };
 
   const [showTable, setShowTable] = useState(true);
-  const [ showNewSupplierForm, setShowNewSupplierForm ] = useState(false);
+  const [showNewSupplierForm, setShowNewSupplierForm] = useState(false);
 
   const { loading: suppliersLoading, error: suppliersError, data: suppliersData, refetch } = useQuery(QUERY_SUPPLIERS);
 
@@ -54,7 +55,7 @@ function SuppliersList () {
           >
             {supplier.name}
           </Link>
-          </td>
+        </td>
         <td>{supplier.address}</td>
         <td>{supplier.phone}</td>
         <td>{supplier.email}</td>
@@ -66,7 +67,10 @@ function SuppliersList () {
     setShowNewSupplierForm(true);
     setShowTable(false);
   }
-
+  const closeNewSupplierForm = () => {
+    setShowNewSupplierForm(false);
+    setShowTable(true)
+  }
   async function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -84,57 +88,60 @@ function SuppliersList () {
 
   const supplierTable = showTable ?
     (
-      <>
-        <Table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">Phone Number</th>
-              <th scope="col">Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {supplierList}
-          </tbody>
-        </Table>
-        <Button onClick={openNewSupplierForm}>New Supplier</Button>
-      </>
+      <Table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {supplierList}
+        </tbody>
+      </Table>
     ) : '';
 
-  const newSupplierForm = showNewSupplierForm 
+  const newSupplierForm = showNewSupplierForm
     ? (
-      <Form onSubmit={handleFormSubmit}>
-        <h2>New Supplier Form</h2>
-        <div className="form-group">
-          <label for="name">Supplier's Name</label>
-          <input type="text" className="form-control" id="name" name="name" placeholder="ABC Company" onChange={handleChange} />
-        </div>
-        <div className="form-group">
-          <label for="address">Address</label>
-          <input type="text" className="form-control" id="address" name="address" placeholder="17 Street Sydney NSW 2000" onChange={handleChange}/>
-        </div>
-        <div className="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="text" className="form-control" id="phone" name="phone" placeholder="+610450207635" onChange={handleChange}/>
-        </div>
-        <div className="form-group">
-          <label for="email">Email address</label>
-          <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off"/>
-        </div>
-        <Button type="submit" className="btn mb-2">Save</Button>
-      </Form>
+      <Modal>
+        <Form onSubmit={handleFormSubmit}>
+          <h2>New Supplier Form</h2>
+          <div className="form-group">
+            <label for="name">Supplier's Name</label>
+            <input type="text" className="form-control" id="name" name="name" placeholder="ABC Company" onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label for="address">Address</label>
+            <input type="text" className="form-control" id="address" name="address" placeholder="17 Street Sydney NSW 2000" onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" className="form-control" id="phone" name="phone" placeholder="+610450207635" onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label for="email">Email address</label>
+            <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off" />
+          </div>
+        </Form>
+        <Footer>
+          <button type="submit" className="btn mb-2 btn-outline-secondary">Save</button>
+          <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={closeNewSupplierForm}>Close</button>
+        </Footer>
+      </Modal>
     )
     : '';
-  
+
   return (
-    <div>
-      <section className='container'>
+    <Container>
+      <Header>
         <h1>Suppliers List</h1>
-        {supplierTable}    
-        {newSupplierForm}
-      </section>
-    </div>
+        {showTable && <button onClick={openNewSupplierForm}>New Supplier</button>}
+      </Header>
+      {supplierTable}
+      {newSupplierForm}
+    </Container>
   );
 }
 
