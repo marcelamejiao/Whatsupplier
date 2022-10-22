@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME, QUERY_MATERIALS } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 import { Link } from 'react-router-dom';
-import { Container, Modal, Footer, Header,Button } from '../components/styles/MaterialLists.styled';
+import { Container, Modal, Footer, Header, Button } from '../components/styles/MaterialLists.styled';
 
 const MaterialsList = () => {
     const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
@@ -55,11 +55,10 @@ const MaterialsList = () => {
     const userMaterialsList = me?.userMaterials?.map((userMaterial, index) => {
         return (
             <tr key={index}>
-                <td>{userMaterial.material.name}</td>
+                <td><Link to={`/inventory/:${userMaterial.material._id}`}>{userMaterial.material.name}</Link></td>
                 <td>{userMaterial.stock}</td>
                 <td>{userMaterial.safetyStock}</td>
                 <td>{userMaterial.anticipatedDemand}</td>
-                <Button><Link to={`/inventory/:${userMaterial.material._id}`}>Update</Link></Button>
             </tr>
         );
     })
@@ -131,7 +130,7 @@ const MaterialsList = () => {
                     </div>
                 </Form>
                 <Footer>
-                    <Button type="submit" style={{backgroundColor:"#569ec2"}} onClick={handleFormSubmit}>Save</Button>
+                    <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
                     <Button type="submit" onClick={closeNewMaterialForm}>Close</Button>
                 </Footer>
             </Modal>

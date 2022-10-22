@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     padding: 30px;
-        margin-top: 1%;
-        margin-left: 7%;
         Table{
             margin-top: 2%;
             thead{
@@ -12,9 +10,6 @@ export const Container = styled.div`
             color: #ffff;
         }
     }
-    @media (max-width: ${({ theme }) => theme.mobile}) {
-    margin-left: 0;
-  }
 `
 
 export const Header = styled.div`
@@ -23,7 +18,7 @@ export const Header = styled.div`
     @media (max-width: ${({ theme }) => theme.mobile}) {
     flex-direction: column;
   }
-`  
+`
 
 export const Modal = styled.div`
     width: 80%;

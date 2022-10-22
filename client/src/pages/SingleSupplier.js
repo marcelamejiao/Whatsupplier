@@ -7,6 +7,7 @@ import { QUERY_SINGLE_SUPPLIER, QUERY_MATERIALS } from '../utils/queries';
 import { UPDATE_SUPPLIER, UPDATE_SUPPLIER_MATERIAL, DELETE_SUPPLIER } from '../utils/mutations';
 import { EditContainer, MaterialContainer, SupplierContainer } from '../components/styles/SingleSupplier.styled'
 import { Modal, Footer, Container } from '../components/styles/SupplierLists.styled'
+import { Button } from '../components/styles/MaterialLists.styled'
 
 
 function SingleSupplier() {
@@ -149,7 +150,7 @@ function SingleSupplier() {
   return (
     <EditContainer>
       <SupplierContainer>
-      <h2>Update Supplier</h2>
+        <h2>Update Supplier</h2>
         <Modal>
           <Form onSubmit={handleUpdateSupplierFormSubmit}>
             <div className="card-header" >
@@ -161,15 +162,15 @@ function SingleSupplier() {
               <li className="list-group-item"><p>Email</p><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
             </ul>
             <Footer>
-              <button type='submit' className="btn mt-2 mb-2 btn-outline-secondary" onClick={handleUpdateSupplierFormSubmit}>Save</button>
-              <button className="btn mt-2 mb-2 btn-outline-secondary" onClick={handleDeleteSupplier}>Delete</button>
+              <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleUpdateSupplierFormSubmit}>Save</Button>
+              <Button type="submit" onClick={handleDeleteSupplier}>Delete</Button>
               <NotificationContainer />
             </Footer>
           </Form>
         </Modal>
       </SupplierContainer>
       <MaterialContainer>
-      <h2>Update Supplier's Materials</h2>
+        <h2>Update Supplier's Materials</h2>
         <Container>
           <Table className="table">
             <thead>
@@ -196,7 +197,7 @@ function SingleSupplier() {
                 <label htmlFor="leadTime">Lead Time (days):</label>
                 <input className="form-control" id='leadTime' name='leadTime' type='number' required onChange={handleMaterialChange} />
               </div>
-              <button type='submit' className="btn mb-2 btn-outline-secondary" onClick={handleAddMaterialFormSubmit}>Add material to Supplier</button>
+              <Button type="submit" onClick={handleAddMaterialFormSubmit}>Add Material</Button>
             </Form>
           </Modal>
         </Container>
