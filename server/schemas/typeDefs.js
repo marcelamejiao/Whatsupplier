@@ -49,6 +49,7 @@ const typeDefs = gql`
     supplier(_id: ID!): Supplier
     materials: [Material]
     me: User
+    cheapestSupplier(materialId: ID!): Supplier
   }
 
   type Mutation {
