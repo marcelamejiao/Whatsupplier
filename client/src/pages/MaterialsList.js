@@ -56,7 +56,6 @@ const MaterialsList = () => {
                 <td>{userMaterial.stock}</td>
                 <td>{userMaterial.safetyStock}</td>
                 <td>{userMaterial.anticipatedDemand}</td>
-                {/* <td><Link to={`/inventory/${userMaterial.material._id}`} className='btn btn-primary'>Update</Link></td> */}
             </tr>
         );
     })

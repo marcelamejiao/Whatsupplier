@@ -7,26 +7,36 @@ import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 
 const SingleMaterial = () => {
-    const params = useParams();
+    const { materialId } = useParams();
     const navigate = useNavigate();
-    const userMaterialId = params.materialId.slice(1)
     const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME)
     const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
-    const materialData = userData?.me?.userMaterials?.filter((m) => m.material._id === userMaterialId)
+    const materialData = userData?.me?.userMaterials?.filter((m) => m.material._id === materialId)
 
     const [formState, setFormState] = useState({
-        materialId: materialData[0]?.material?._id,
-        stock: materialData[0].stock,
-        safetyStock: materialData[0].safetyStock,
-        anticipatedDemand: materialData[0].anticipatedDemand
+        materialId: '',
+        stock: '',
+        safetyStock: '',
+        anticipatedDemand: ''
     });
-    const materialName = materialData[0]?.material.name
     if (userLoading) {
         return 'Loading'
     }
     if (userError) {
         return `Error: ${userError.message}`
     }
+
+    if (! formState.materialId) {
+        setFormState({
+            materialId: materialData[0].material._id,
+            stock: materialData[0].stock,
+            safetyStock: materialData[0].safetyStock,
+            anticipatedDemand: materialData[0].anticipatedDemand
+        });
+    }
+
+    const materialName = materialData[0].material.name
+
     const handleChange = (event) => {
         const { name, value } = event.target;
     
@@ -34,9 +44,9 @@ const SingleMaterial = () => {
           ...formState,
           [name]: value,
         });
-      };
+    };
 
-      const handleFormSubmit = async (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
         try {
             await updateUserMaterial({
@@ -53,13 +63,9 @@ const SingleMaterial = () => {
         }
     }
     return (
-        <>
-            <h2>SingleMaterial page</h2>
+        <div className='container'>
+            <h2><strong>Edit Inventory Item:</strong> {materialName}</h2>
             <Form onSubmit={handleFormSubmit}>
-                <h2>New Inventory Form</h2>
-                <div className="form-group" >
-                    <label htmlFor="name">{materialName}</label>
-                </div>
                 <div className="form-group">
                     <label htmlFor="stock">Stock</label>
                     <input type="number" className="form-control" name="stock" value={formState.stock} min="0" onChange={handleChange} />
@@ -74,7 +80,7 @@ const SingleMaterial = () => {
                 </div>
                 <Button type="submit" className="btn mb-2">Save</Button>
             </Form>
-        </>
+        </div>
 
     )
 }

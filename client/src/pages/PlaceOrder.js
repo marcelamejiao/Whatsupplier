@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_ME, QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 const PlaceOrder = () => {
   const { materialId } = useParams();
@@ -68,7 +69,7 @@ const PlaceOrder = () => {
   }
 
   return (
-    <>
+    <div className='container'>
       <h2>Place order</h2>
       <div className='row'>
         <div className="col-md-6 d-flex justify-content-center">
@@ -76,8 +77,13 @@ const PlaceOrder = () => {
             <Card.Body>
               <Card.Title><h3>Material</h3></Card.Title>
               <Card.Text>
-                <strong>Name: </strong>{userMaterial.material.name}<br />
-                <strong>Stock: </strong>{userMaterial.stock}
+                <section>
+                  <strong>Name: </strong>{userMaterial.material.name}<br />
+                  <strong>Stock: </strong>{userMaterial.stock}
+                </section>
+                <section>
+                  <Link to={`/inventory/${userMaterial.material._id}`} className='btn btn-primary'>Update</Link>
+                </section>
               </Card.Text>
             </Card.Body>
           </Card>
@@ -92,7 +98,7 @@ const PlaceOrder = () => {
           </Card>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
