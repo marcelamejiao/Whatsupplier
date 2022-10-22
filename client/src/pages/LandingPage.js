@@ -1,5 +1,5 @@
 import React from 'react';
-import {MainPageContainer, ImageContainer, FooterContainer } from '../components/styles/LandingPage';
+import {MainPageContainer, ImageContainer, FooterContainer } from '../components/styles/LandingPage.styled';
 
 function LandingPage({ currentPage, handlePageChange }) {
     return (
