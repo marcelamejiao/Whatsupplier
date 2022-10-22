@@ -17,8 +17,10 @@ import SingleMaterial from './pages/SingleMaterial'
 import SuppliersList from './pages/SuppliersList';
 import SingleSupplier from './pages/SingleSupplier';
 import Production from './pages/Production'
+import SendMaterialToProduction from './pages/SendMaterialToProduction';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -80,7 +82,11 @@ function App() {
               />
               <Route
                 path="/production"
-                element={<Production />} */}
+                element={<Production />}
+              />
+              <Route
+                path="/materials/:materialId/send-to-production"
+                element={<SendMaterialToProduction />}
               />
               <Route
                 path="/suppliers"

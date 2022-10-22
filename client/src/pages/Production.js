@@ -1,71 +1,64 @@
-import React, { useState} from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
-import { useQuery, useMutation } from '@apollo/client';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
+import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
-import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 
-const SendToProduction = () => {
-    const params = useParams();
-    const navigate = useNavigate();
-    const userMaterialId = params.materialId.slice(1)
-    const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME)
-    const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
-    const materialData = userData?.me?.userMaterials?.filter((m) => m.material._id === userMaterialId)
+const Production = () => {
 
-    const [formState, setFormState] = useState({
-        materialId: materialData[0]?.material?._id,
-        stock: materialData[0].stock,
-    });
-    const materialName = materialData[0]?.material.name
+   // Force reloading the suppliers when visiting the page.
+    useEffect(() => {
+        const fetchFunc = async () => await refetchMe();
+        fetchFunc();
+    },[]);
+
+    const { loading: userLoading, error: userError, data: userData, refetch: refetchMe } = useQuery(QUERY_ME);
+
     if (userLoading) {
         return 'Loading'
     }
     if (userError) {
         return `Error: ${userError.message}`
     }
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-    
-        setFormState({
-          ...formState,
-          [name]: value,
-        });
-      };
+    const { me } = userData;
 
-      const handleFormSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            await updateUserMaterial({
-                variables: {
-                    _id: formState.materialId,
-                    stock: parseInt(formState.stock),
-                    safetyStock: parseInt(formState.safetyStock),
-                    anticipatedDemand: parseInt(formState.anticipatedDemand)
-                },
-            });
-            navigate('/inventory')
-        } catch (e) {
-            console.error(e);
-        }
-    }
+    const userMaterialsList = me?.userMaterials?.map((userMaterial, index) => {
+        return (
+            <tr key={index}>
+                <td>{userMaterial.material.name}</td>
+                <td>
+                    {userMaterial.stock}
+                </td>
+                <td>
+                <Link
+                    to={`/materials/${userMaterial.material._id}/send-to-production`}
+                >
+                    Send To Production
+                </Link>
+                </td>
+            </tr>
+        );
+    })
+
     return (
         <>
-            <h2>SingleMaterial page</h2>
-            <Form onSubmit={handleFormSubmit}>
-                <h2>New Inventory Form</h2>
-                <div className="form-group" >
-                    <label htmlFor="name">{materialName}</label>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="stock">Stock</label>
-                    <input type="number" className="form-control" name="stock" value={formState.stock} min="0" onChange={handleChange} />
-                </div>
-                <Button type="submit" className="btn mb-2">Save</Button>
-            </Form>
+            <h2>Production</h2>
+            <Table className="table">
+            <thead className="thead-dark">
+                <tr>
+                    <th scope="col">Material Name</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {userMaterialsList}
+            </tbody>
+            </Table>
         </>
 
     )
 }
 
-export default SendToProduction;
+export default Production;
