@@ -50,11 +50,13 @@ const MaterialsList = () => {
     const userMaterialsList = me?.userMaterials?.map((userMaterial, index) => {
         return (
             <tr key={index}>
-                <td>{userMaterial.material.name}</td>
+                <td>
+                    <Link to={`/inventory/${userMaterial.material._id}/place-order`}>{userMaterial.material.name}</Link>
+                </td>
                 <td>{userMaterial.stock}</td>
                 <td>{userMaterial.safetyStock}</td>
                 <td>{userMaterial.anticipatedDemand}</td>
-                <button><Link to={`/inventory/:${userMaterial.material._id}`}>Update</Link></button>
+                {/* <td><Link to={`/inventory/${userMaterial.material._id}`} className='btn btn-primary'>Update</Link></td> */}
             </tr>
         );
     })
