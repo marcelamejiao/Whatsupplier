@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
+import SignUpImage from '../images/elements-web-design-opt.png'
 
 import Auth from '../utils/auth';
+import { SignupBody } from '../components/styles/Signup';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
@@ -41,77 +42,75 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="username"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Company Name"
-                  name="companyName"
-                  type="text"
-                  value={formState.companyName}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Company Details"
-                  name="companyDetails"
-                  type="text"
-                  value={formState.companyDetails}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
-            )}
+    <SignupBody>
+      <div className="card">
+        <h4>Sign Up</h4>
+        <div>
+          {data ? (
+            <p>
+              Success! You may now head{' '}
+              <Link to="/">back to the homepage.</Link>
+            </p>
+          ) : (
+            <form onSubmit={handleFormSubmit}>
+              <p>Username</p>
+              <input
+                placeholder="Your username"
+                name="username"
+                type="text"
+                value={formState.name}
+                onChange={handleChange}
+              />
+              <p>E-mail</p>
+              <input
+                placeholder="Your email"
+                name="email"
+                type="email"
+                value={formState.email}
+                onChange={handleChange}
+              />
+              <p>Password</p>
+              <input
+                placeholder="******"
+                name="password"
+                type="password"
+                value={formState.password}
+                onChange={handleChange}
+              />
+              <p>Company Name</p>
+              <input
+                placeholder="Company Name"
+                name="companyName"
+                type="text"
+                value={formState.companyName}
+                onChange={handleChange}
+              />
+              <p>Company Details</p>
+              <input
+                placeholder="Company Details"
+                name="companyDetails"
+                type="text"
+                value={formState.companyDetails}
+                onChange={handleChange}
+              />
+              <button
+                style={{ cursor: 'pointer' }}
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          )}
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
-    </main>
+      <img src={SignUpImage} alt='signup'></img>
+    </SignupBody>
   );
 };
 

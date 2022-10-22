@@ -1,3 +1,6 @@
+import { ThemeProvider } from 'styled-components';
+import { Container } from './components/styles/Container.styled'
+import GlobalStyles from './components/styles/Global';
 import React from 'react';
 import 'react-notifications/lib/notifications.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -44,63 +47,73 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const theme = {
+  colors: {
+    body: '#ffff',
+    footer: '#569ec2'
+  },
+  mobile: '768px',
+}
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Navbar />
-          <div className='container-fluid'>
-            <Routes>
-              <Route
-                path='/'
-                element={<LandingPage />}
-              />
-              <Route
-                path="/login"
-                element={<Login />}
-              />
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
-              <Route
-                path="/home"
-                element={<Home />}
-              />
-              
-              <Route
-                path="/inventory"
-                element={<MaterialsList />}
-              />
-              
-              <Route
-                path="/inventory/:materialId"
-                element={<SingleMaterial />}
-              />
-              {/* <Route
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+        <Router>
+          <>
+            <GlobalStyles />
+            <Navbar />
+            <Container>
+              <Routes>
+                <Route
+                  path='/'
+                  element={<LandingPage />}
+                />
+                <Route
+                  path="/login"
+                  element={<Login />}
+                />
+                <Route
+                  path="/signup"
+                  element={<Signup />}
+                />
+                <Route
+                  path="/home"
+                  element={<Home />}
+                />
+
+                <Route
+                  path="/inventory"
+                  element={<MaterialsList />}
+                />
+
+                <Route
+                  path="/inventory/:materialId"
+                  element={<SingleMaterial />}
+                />
+                {/* <Route
                 path="/production"
                 element={<Production />}
               />
               */}
-              <Route
-                path="/suppliers"
-                element={<SuppliersList />}
-              />
-              <Route
-                path="/suppliers/:supplierId"
-                element={<SingleSupplier />}
-              />
-              <Route
-                path='*'
-                element={<h1 className='display-2'>Wrong page!</h1>}
-              />
-            </Routes>
-          </div>
-          <Footer />
-        </>
-      </Router>
-    </ApolloProvider>
+                <Route
+                  path="/suppliers"
+                  element={<SuppliersList />}
+                />
+                <Route
+                  path="/suppliers/:supplierId"
+                  element={<SingleSupplier />}
+                />
+                <Route
+                  path='*'
+                  element={<h1 className='display-2'>Wrong page!</h1>}
+                />
+              </Routes>
+            </Container>
+            <Footer />
+          </>
+        </Router>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }
 
