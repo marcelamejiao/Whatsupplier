@@ -19,6 +19,33 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    cheapestSupplier: async (parent, { materialId }) => {
+      // Get the suppliers that sell the material
+      let suppliers = await Supplier.find({
+        supplierMaterials: {
+          $elemMatch: {
+            material: materialId
+          }
+        }
+      })
+      .populate('supplierMaterials.material');
+
+      // Remove the Materials from the supplierMaterials array that are not relevant to the current material
+      suppliers = suppliers.map((supplier) => {
+        supplier.supplierMaterials = supplier.supplierMaterials.filter(
+          (supplierMaterial) => supplierMaterial.material._id == materialId
+        );
+        return supplier;
+      });
+
+      // Sort from the cheapest to the most expensive
+      suppliers = suppliers.sort(
+        (supplierA, supplierB) => supplierA.supplierMaterials[0].cost - supplierB.supplierMaterials[0].cost 
+      );
+
+      // Return the cheapest to the front-end
+      return suppliers[0];
+    }
   },
 
   Mutation: {

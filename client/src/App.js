@@ -16,6 +16,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import MaterialsList from './pages/MaterialsList'
+import PlaceOrder from './pages/PlaceOrder';
 import SingleMaterial from './pages/SingleMaterial'
 import SuppliersList from './pages/SuppliersList';
 import SingleSupplier from './pages/SingleSupplier';
@@ -87,7 +88,10 @@ function App() {
                   path="/inventory"
                   element={<MaterialsList />}
                 />
-
+                <Route
+                  path="/inventory/:materialId/place-order"
+                  element={<PlaceOrder />}
+                />
                 <Route
                   path="/inventory/:materialId"
                   element={<SingleMaterial />}

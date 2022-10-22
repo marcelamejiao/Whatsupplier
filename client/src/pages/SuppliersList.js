@@ -110,19 +110,19 @@ function SuppliersList() {
         <Form onSubmit={handleFormSubmit}>
           <h2>New Supplier Form</h2>
           <div className="form-group">
-            <label for="name">Supplier's Name</label>
+            <label htmlFor="name">Supplier's Name</label>
             <input type="text" className="form-control" id="name" name="name" placeholder="ABC Company" onChange={handleChange} />
           </div>
           <div className="form-group">
-            <label for="address">Address</label>
+            <label htmlFor="address">Address</label>
             <input type="text" className="form-control" id="address" name="address" placeholder="17 Street Sydney NSW 2000" onChange={handleChange} />
           </div>
           <div className="form-group">
-            <label for="phone">Phone Number</label>
+            <label htmlFor="phone">Phone Number</label>
             <input type="text" className="form-control" id="phone" name="phone" placeholder="+610450207635" onChange={handleChange} />
           </div>
           <div className="form-group">
-            <label for="email">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" onChange={handleChange} autoComplete="off" />
           </div>
         </Form>

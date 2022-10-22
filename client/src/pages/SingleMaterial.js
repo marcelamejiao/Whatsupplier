@@ -8,18 +8,17 @@ import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 import { Modal, Footer } from '../components/styles/SupplierLists.styled';
 
 const SingleMaterial = () => {
-    const params = useParams();
+    const { materialId } = useParams();
     const navigate = useNavigate();
-    const userMaterialId = params.materialId.slice(1)
     const { loading: userLoading, error: userError, data: userData } = useQuery(QUERY_ME)
     const [updateUserMaterial] = useMutation(UPDATE_USER_MATERIAL);
-    const materialData = userData?.me?.userMaterials?.filter((m) => m.material._id === userMaterialId)
+    const materialData = userData?.me?.userMaterials?.filter((m) => m.material._id === materialId)
 
     const [formState, setFormState] = useState({
-        materialId: userMaterialId,
-        stock: materialData[0]?.stock,
-        safetyStock: materialData[0]?.safetyStock,
-        anticipatedDemand: materialData[0]?.anticipatedDemand
+        materialId: '',
+        stock: '',
+        safetyStock: '',
+        anticipatedDemand: ''
     });
     if (userLoading) {
         return 'Loading'
@@ -27,7 +26,18 @@ const SingleMaterial = () => {
     if (userError) {
         return `Error: ${userError.message}`
     }
-    const materialName = materialData[0]?.material.name
+
+    if (! formState.materialId) {
+        setFormState({
+            materialId: materialData[0].material._id,
+            stock: materialData[0].stock,
+            safetyStock: materialData[0].safetyStock,
+            anticipatedDemand: materialData[0].anticipatedDemand
+        });
+    }
+
+    const materialName = materialData[0].material.name
+
     const handleChange = (event) => {
         const { name, value } = event.target;
 
@@ -72,11 +82,11 @@ const SingleMaterial = () => {
                     <label htmlFor="anticipatedDemand">Anticipated Demand</label>
                     <input type="number" className="form-control" name="anticipatedDemand" value={formState.anticipatedDemand} min="0" onChange={handleChange} autoComplete="off" />
                 </div>
+                <Footer>
+                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={handleFormSubmit}>Save</button>
+                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={() => navigate('/inventory')}>Close</button>
+                </Footer>
             </Form>
-            <Footer>
-                <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={handleFormSubmit}>Save</button>
-                <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={() => navigate('/inventory')}>Close</button>
-            </Footer>
         </Modal>
 
     )

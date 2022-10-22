@@ -61,3 +61,20 @@ export const QUERY_MATERIALS= gql`
     }
   }
 `;
+
+export const QUERY_CHEAPEST_SUPPLIER = gql`
+  query cheapestSupplier($materialId: ID!) {
+    cheapestSupplier(materialId: $materialId) {
+      _id
+      name
+      supplierMaterials {
+        cost
+        leadTime
+        material {
+          name
+          _id
+        }
+      }
+    }
+  }
+`;

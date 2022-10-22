@@ -55,7 +55,9 @@ const MaterialsList = () => {
     const userMaterialsList = me?.userMaterials?.map((userMaterial, index) => {
         return (
             <tr key={index}>
-                <td><Link to={`/inventory/:${userMaterial.material._id}`}>{userMaterial.material.name}</Link></td>
+                <td>
+                    <Link to={`/inventory/${userMaterial.material._id}/place-order`}>{userMaterial.material.name}</Link>
+                </td>
                 <td>{userMaterial.stock}</td>
                 <td>{userMaterial.safetyStock}</td>
                 <td>{userMaterial.anticipatedDemand}</td>
@@ -128,11 +130,11 @@ const MaterialsList = () => {
                         <label htmlFor="anticipatedDemand">Anticipated Demand</label>
                         <input type="number" className="form-control" name="anticipatedDemand" placeholder="100" min="0" onChange={handleChange} autoComplete="off" />
                     </div>
+                    <Footer>
+                        <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
+                        <Button type="button" onClick={closeNewMaterialForm}>Close</Button>
+                    </Footer>
                 </Form>
-                <Footer>
-                    <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
-                    <Button type="submit" onClick={closeNewMaterialForm}>Close</Button>
-                </Footer>
             </Modal>
         )
         : '';
