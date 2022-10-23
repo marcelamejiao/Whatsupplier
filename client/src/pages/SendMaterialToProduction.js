@@ -68,6 +68,7 @@ const SendMaterialToProduction = () => {
       navigate('/production');
     } catch (e) {
       console.error(e);
+      NotificationManager.error('Please enter a number', 'Error');
     }
   }
 
