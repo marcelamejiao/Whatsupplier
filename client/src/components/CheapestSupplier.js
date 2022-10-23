@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { Card } from 'react-bootstrap';
 import { QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
-import ReorderPoint from "./ReorderPoint";
+import ReorderPoint from "./ReOrderPoint";
 
 const CheapestSupplier = ({ materialId, materialStock }) => {
   const {
