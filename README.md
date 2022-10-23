@@ -60,6 +60,10 @@ npm run start
  ![]()
  ![]()
 
+## **Testing with Stripe**
+
+When testing the payment system (Stripe) please use one of the credit cards found here: [https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers#visa](https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers#visa)
+
 ## **Deployed link**
 
 💡 Live version: [click here!]()
