@@ -61,6 +61,7 @@ const typeDefs = gql`
     deleteSupplier(_id: ID!): Supplier
     updateUserMaterial(_id: ID! stock:Int! safetyStock:Int! anticipatedDemand:Int!): User
     updateSupplierMaterial(_id: ID!, materialId: ID!, cost: Float!, leadTime: Int!): Supplier
+    placeOrder(units: Int!, materialId: ID!, supplierId: ID!): User
   }
 `;
 
