@@ -45,6 +45,31 @@ const resolvers = {
 
       // Return the cheapest to the front-end
       return suppliers[0];
+    },
+    reorderPoint: async (parent, { supplierId, materialId }, context) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id }).populate('userMaterials.material');
+        const userMaterials = user.userMaterials;
+        const userMaterial = userMaterials.find((userMaterial) => {
+          return userMaterial.material._id == materialId
+        });
+
+        const supplier = await Supplier.findOne({ _id: supplierId }).populate('supplierMaterials.material');
+        const supplierMaterials = supplier.supplierMaterials;
+        const supplierMaterial = supplierMaterials.find((supplierMaterial) => {
+          return supplierMaterial.material._id == materialId;
+        });
+
+        const safetyStock = userMaterial.safetyStock;
+        const anticipatedDemand = userMaterial.anticipatedDemand;
+        const leadTime = supplierMaterial.leadTime;
+
+        // Re-Order Point = Anticipated Demand x Lead Time + Safety Stock
+        const reorderPoint = (anticipatedDemand * leadTime) + safetyStock;
+        return reorderPoint;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
     }
   },
 
@@ -145,7 +170,49 @@ const resolvers = {
         { new: true, runValidators: true }
       )
         .populate({ path: 'supplierMaterials.material', select: '-__v' });
-    }
+    },
+    placeOrder: async (parent, { units, materialId, supplierId }, context) => {
+      if (context.user) {
+        // Find the user with it's userMaterials
+        const user = await User.findOne({ _id: context.user._id }).populate('userMaterials.material');
+        const userMaterials = user.userMaterials;
+
+        // Find the userMaterial specified by materialId
+        const userMaterial = userMaterials.find((userMaterial) => {
+          return userMaterial.material._id == materialId;
+        });
+
+        // TODO: Future development, send an email to the supplier with the order details
+
+        // Increment the stock my the units
+        const stock = userMaterial.stock + units;
+        const safetyStock = userMaterial.safetyStock;
+        const anticipatedDemand = userMaterial.anticipatedDemand;
+
+        // Remove the material from the user's userMaterials
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $pull: { userMaterials: { material: materialId } },
+          },
+          { new: true, runValidators: true }
+        );
+  
+        // Re-Add the material to the user's userMaterials but with the new stock
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $addToSet: { userMaterials: { material: materialId, stock, safetyStock, anticipatedDemand } }
+          },
+          { new: true, runValidators: true }
+        )
+          .populate({ path: 'userMaterials.material', select: '-__v' });
+
+        return await User.findOne({ _id: context.user._id }).populate('userMaterials.material');
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 

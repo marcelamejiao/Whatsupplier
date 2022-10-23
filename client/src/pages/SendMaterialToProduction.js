@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
-import { Footer, Modal, Button } from '../components/styles/MaterialLists.styled';
+import { Footer, Modal, Button } from '../components/styles/SendToProduction.styled';
 
 const SendMaterialToProduction = () => {
   const { materialId } = useParams();

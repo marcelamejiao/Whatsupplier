@@ -91,3 +91,23 @@ export const UPDATE_SUPPLIER_MATERIAL = gql`
     }
 `;
 
+export const PLACE_ORDER = gql`
+    mutation PlaceOrder($units: Int!, $materialId: ID!, $supplierId: ID!) {
+        placeOrder(units: $units, materialId: $materialId, supplierId: $supplierId) {
+            _id
+            username
+            userMaterials {
+                material {
+                name
+                _id
+                }
+                stock
+                safetyStock
+                anticipatedDemand
+            }
+            email
+            companyName
+            companyDetails
+        }
+    }
+`;

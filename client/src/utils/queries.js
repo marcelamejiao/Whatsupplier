@@ -78,3 +78,9 @@ export const QUERY_CHEAPEST_SUPPLIER = gql`
     }
   }
 `;
+
+export const QUERY_REORDER_POINT = gql`
+  query reorderPoint($supplierId: ID!, $materialId: ID!) {
+    reorderPoint(supplierId: $supplierId, materialId: $materialId)
+  }
+`;
