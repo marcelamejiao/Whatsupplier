@@ -4,7 +4,7 @@ import {StyledFooter} from './styles/StyledFooter.styled'
 function Footer () {
     return (
         <StyledFooter>
-            <p>Created @2022</p>
+             <p>&copy; 2022 WhatSupplier. All rights reserved</p>
             <section>            
                 <a href="https://github.com/dorisliu333/whatsupplier" target="_blank" rel="noreferrer" className="fa fa-github"> Github</a>
 

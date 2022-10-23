@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME, QUERY_MATERIALS } from '../utils/queries';
@@ -97,6 +98,7 @@ const MaterialsList = () => {
             window.location.reload();
         } catch (e) {
             console.error(e);
+            NotificationManager.error('Please fill the all info and make sure it is correct:)', 'Error');
         }
     }
 
@@ -133,6 +135,7 @@ const MaterialsList = () => {
                     <Footer>
                         <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
                         <Button type="button" onClick={closeNewMaterialForm}>Close</Button>
+                        <NotificationContainer />
                     </Footer>
                 </Form>
             </Modal>

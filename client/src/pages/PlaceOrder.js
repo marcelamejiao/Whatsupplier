@@ -4,6 +4,9 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ME, QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import { Container,  Button} from '../components/styles/PlaceOrder.style'
+
+
 
 const PlaceOrder = () => {
   const { materialId } = useParams();
@@ -69,36 +72,34 @@ const PlaceOrder = () => {
   }
 
   return (
-    <div className='container'>
+    <Container>
       <h2>Place order</h2>
-      <div className='row'>
-        <div className="col-md-6 d-flex justify-content-center">
-          <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Title><h3>Material</h3></Card.Title>
-              <Card.Text>
+      <div className='row d-flex justify-content-center'>
+        <div className="style-card m-5">
+          <Card>
+            <Card.Body style={{ width: '20rem', height:'15rem' }}>
+              <h3>Material</h3>
                 <section>
                   <strong>Name: </strong>{userMaterial.material.name}<br />
                   <strong>Stock: </strong>{userMaterial.stock}
                 </section>
-                <section>
-                  <Link to={`/inventory/${userMaterial.material._id}`} className='btn btn-primary'>Update</Link>
-                </section>
-              </Card.Text>
+                <Button>
+                  <Link to={`/inventory/${userMaterial.material._id}`}>Update</Link>
+                </Button>
             </Card.Body>
           </Card>
         </div>
-        <div className="col-md-6 d-flex justify-content-center">
-        <Card style={{ width: '18rem' }}>
-            <Card.Body>
-              <Card.Text>
+        <div className="style-card m-5">
+        <Card >
+            <Card.Body style={{ width: '20rem', height:'15rem' }}>
+              <div>
               {cheapestSupplierContainer}
-              </Card.Text>
+              </div>
             </Card.Body>
           </Card>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

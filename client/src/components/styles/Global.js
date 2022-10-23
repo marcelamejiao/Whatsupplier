@@ -11,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     font-size: 1.15em;
     margin: 0;
-    margin-bottom:50px;
+    margin-bottom:60px;
   }
   p {
     opacity: 0.6;

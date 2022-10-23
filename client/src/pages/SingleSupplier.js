@@ -144,6 +144,7 @@ function SingleSupplier() {
 
     } catch (e) {
       console.error(e);
+      NotificationManager.error('Please fill all info', 'Error');
     }
   };
 
@@ -202,6 +203,7 @@ function SingleSupplier() {
           </Modal>
         </Container>
       </MaterialContainer>
+
     </EditContainer>
   );
 }

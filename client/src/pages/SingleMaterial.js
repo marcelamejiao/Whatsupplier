@@ -1,11 +1,12 @@
-
 import React, { useState } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import { UPDATE_USER_MATERIAL } from '../utils/mutations';
 import { Modal, Footer } from '../components/styles/SupplierLists.styled';
+import { Button } from '../components/styles/MaterialLists.styled'
 
 const SingleMaterial = () => {
     const { materialId } = useParams();
@@ -61,6 +62,7 @@ const SingleMaterial = () => {
             navigate('/inventory')
         } catch (e) {
             console.error(e);
+            NotificationManager.error('Please fill the all info and make sure it is correct:)', 'Error');
         }
     }
     return (
@@ -83,8 +85,9 @@ const SingleMaterial = () => {
                     <input type="number" className="form-control" name="anticipatedDemand" value={formState.anticipatedDemand} min="0" onChange={handleChange} autoComplete="off" />
                 </div>
                 <Footer>
-                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={handleFormSubmit}>Save</button>
-                    <button type="submit" className="btn mb-2 btn-outline-secondary" onClick={() => navigate('/inventory')}>Close</button>
+                    <Button type="submit"  onClick={handleFormSubmit}>Save</Button>
+                    <Button type="submit"  onClick={() => navigate(`/inventory/${materialId}/place-order`)}>Close</Button>
+                    <NotificationContainer/>
                 </Footer>
             </Form>
         </Modal>
