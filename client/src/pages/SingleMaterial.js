@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
@@ -62,6 +62,7 @@ const SingleMaterial = () => {
             navigate('/inventory')
         } catch (e) {
             console.error(e);
+            NotificationManager.error('Please fill the all info and make sure it is correct:)', 'Error');
         }
     }
     return (
@@ -86,6 +87,7 @@ const SingleMaterial = () => {
                 <Footer>
                     <Button type="submit"  onClick={handleFormSubmit}>Save</Button>
                     <Button type="submit"  onClick={() => navigate(`/inventory/${materialId}/place-order`)}>Close</Button>
+                    <NotificationContainer/>
                 </Footer>
             </Form>
         </Modal>

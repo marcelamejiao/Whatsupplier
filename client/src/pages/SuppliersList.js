@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { Table, Form } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SUPPLIERS } from '../utils/queries';
@@ -79,11 +80,11 @@ function SuppliersList() {
       await addSupplier({
         variables: { ...formState },
       });
-
+      NotificationManager.success('New Supplier has been added', 'Notification');
       window.location.reload();
-      // TODO: separate path
     } catch (e) {
       console.error(e);
+      NotificationManager.error(e.message, 'Error');
     }
   }
 
@@ -129,6 +130,7 @@ function SuppliersList() {
         <Footer>
           <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
           <Button type="submit" onClick={closeNewSupplierForm}>Close</Button>
+          <NotificationContainer />
         </Footer>
       </Modal>
     )
@@ -142,6 +144,7 @@ function SuppliersList() {
       </Header>
       {supplierTable}
       {newSupplierForm}
+
     </Container>
   );
 }
