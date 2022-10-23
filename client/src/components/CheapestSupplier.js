@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { Card } from 'react-bootstrap';
 import { QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
-import ReOrderPoint from "./ReOrderPoint";
+import ReorderPoint from "./ReorderPoint";
 
 const CheapestSupplier = ({ materialId, materialStock }) => {
   const { 
@@ -39,9 +39,16 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
     );
   } else {
     cheapestSupplierContainer = (
-      <section>
-        The supplier <strong>{cheapestSupplier.name}</strong> has the lowest cost for this material!
-      </section>
+      <>
+        <div>
+          <section>
+            The supplier <strong>{cheapestSupplier.name}</strong> has the lowest cost for this material!
+          </section>
+        </div>
+        <div>
+          <ReorderPoint supplierId={cheapestSupplier._id} materialId={materialId} materialStock={materialStock} />
+        </div>
+      </>
     );
   }
 
@@ -49,12 +56,7 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
     <>
       <Card >
         <Card.Body style={{ width: '20rem' }}>
-          <div>
           {cheapestSupplierContainer}
-          </div>
-          <div>
-            <ReOrderPoint supplierId={cheapestSupplier._id} materialId={materialId} materialStock={materialStock} />
-          </div>
         </Card.Body>
       </Card>
     </>
