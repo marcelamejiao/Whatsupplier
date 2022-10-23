@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
-import { Container,  Button} from '../components/styles/PlaceOrder.style'
+import { Container, Button } from '../components/styles/PlaceOrder.style'
 import CheapestSupplier from '../components/CheapestSupplier';
 
 const PlaceOrder = () => {
@@ -33,20 +33,24 @@ const PlaceOrder = () => {
       <div className='row d-flex justify-content-center'>
         <div className="style-card m-5">
           <Card>
-            <Card.Body style={{ width: '20rem', height:'15rem' }}>
+            <Card.Body style={{ width: '20rem', height: '15rem' }}>
               <h3>Material</h3>
-                <section>
-                  <strong>Name: </strong>{userMaterial.material.name}<br />
-                  <strong>Stock: </strong>{userMaterial.stock} units
-                </section>
-                <Button>
-                  <Link to={`/inventory/${userMaterial.material._id}`}>Update</Link>
-                </Button>
+              <section>
+                <strong>Name: </strong>{userMaterial.material.name}<br />
+                <strong>Stock: </strong>{userMaterial.stock} units
+              </section>
+              <Button>
+                <Link to={`/inventory/${userMaterial.material._id}`}>Update</Link>
+              </Button>
             </Card.Body>
           </Card>
         </div>
         <div className="style-card m-5">
-          <CheapestSupplier materialId={materialId} materialStock={userMaterial.stock} />
+          <Card>
+            <Card.Body style={{ width: '20rem', height: '15rem' }}>
+              <CheapestSupplier materialId={materialId} materialStock={userMaterial.stock} />
+            </Card.Body>
+          </Card>
         </div>
       </div>
     </Container>

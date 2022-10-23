@@ -5,16 +5,16 @@ import { QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
 import ReorderPoint from "./ReorderPoint";
 
 const CheapestSupplier = ({ materialId, materialStock }) => {
-  const { 
-    loading: cheapestSupplierLoading, 
-    error: cheapestSupplierError, 
+  const {
+    loading: cheapestSupplierLoading,
+    error: cheapestSupplierError,
     data: cheapestSupplierData
   } = useQuery(
-    QUERY_CHEAPEST_SUPPLIER, 
+    QUERY_CHEAPEST_SUPPLIER,
     {
       variables: {
         materialId: materialId
-      } 
+      }
     }
   );
 
@@ -54,11 +54,7 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
 
   return (
     <>
-      <Card >
-        <Card.Body style={{ width: '20rem' }}>
           {cheapestSupplierContainer}
-        </Card.Body>
-      </Card>
     </>
   );
 };
