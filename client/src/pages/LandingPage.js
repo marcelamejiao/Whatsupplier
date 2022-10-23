@@ -16,8 +16,8 @@ function LandingPage({ currentPage, handlePageChange }) {
                         Using the software the supplier’s manager can choose the best offer in price without sacrificing quality when needed to place a raw materials order.
                     </p>
                     <p>
-                        In the Supply Chain process the factory purchases the raw materials from diverse suppliers.
-                        Using the software the supplier’s manager can choose the best offer in price without sacrificing quality when needed to place a raw materials order.
+                        WhatSupplier will use a function to decide which supplier offers the lowest cost to place an order. 
+                        Also will use a function to determine the quantity in inventory of any raw material to proceed with placing a new order.
                     </p>
                 </FooterContainer>
         </MainPageContainer>

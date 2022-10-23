@@ -50,4 +50,7 @@ export const Button = styled.button`
         a{
             color: #ffff;
         }
+        &:hover{
+            text-decoration: underline;
+        }
 `
