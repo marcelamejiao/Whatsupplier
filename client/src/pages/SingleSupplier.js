@@ -163,7 +163,7 @@ function SingleSupplier() {
               <li className="list-group-item"><p>Email</p><input name='email' value={supplierFormState.email} onChange={handleSupplierChange} /></li>
             </ul>
             <Footer>
-              <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleUpdateSupplierFormSubmit}>Save</Button>
+              <Button type="submit" onClick={handleUpdateSupplierFormSubmit}>Save</Button>
               <Button type="submit" onClick={handleDeleteSupplier}>Delete</Button>
               <NotificationContainer />
             </Footer>

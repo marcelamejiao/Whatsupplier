@@ -90,7 +90,7 @@ const SendMaterialToProduction = () => {
         </div>
       </Form>
       <Footer>
-        <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Send Production</Button>
+        <Button type="submit" onClick={handleFormSubmit}>Send Production</Button>
         <Button type="submit" onClick={handleClose}>Close</Button>
       </Footer>
     </Modal>
