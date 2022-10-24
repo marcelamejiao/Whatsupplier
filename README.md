@@ -6,6 +6,7 @@
 - [**Installation**](#installation)
 - [**Technologies Used**](#technologies-used)
 - [**Preview**](#preview)
+- [**Testing with Stripe**](#testing-with-stripe)
 - [**Deployed link**](#deployed-link)
 - [**Future Development**](#future-development)
 - [**Questions**](#questions)
@@ -82,7 +83,7 @@ npm run develop
 
 ## **Testing with Stripe**
 
-When testing the payment system (Stripe) please use one of the credit cards found here: [https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers#visa](https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers#visa)
+When testing the payment system (Stripe) please use one of the credit cards found [here.](https://stripe.com/docs/testing?numbers-or-method-or-token=card-numbers#visa)
 
 ## **Deployed link**
 

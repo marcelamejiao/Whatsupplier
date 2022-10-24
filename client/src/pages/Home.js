@@ -62,7 +62,7 @@ function Home() {
 
       <Card>
         <div>
-          <h5>My Inventory</h5>
+          <h2>My Inventory</h2>
           <p>Here you can see: Material's list and Update the Stock, Safety Stock and Anticipated Demand or view One Material and Place an Order</p>
           <Button><a href="/inventory">My Inventory</a></Button>
         </div>
@@ -73,7 +73,7 @@ function Home() {
 
       <Card>
         <div>
-          <h5>My Production</h5>
+          <h2>My Production</h2>
           <p>Here you can send materials to production.</p>
           <Button><a href="/production">My Production</a></Button>
         </div>
