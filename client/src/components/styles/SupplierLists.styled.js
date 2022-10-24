@@ -35,7 +35,7 @@ export const Header = styled.div`
     button{
         width: 10rem;
         margin: 3px;
-        background-color: #569ec2;
+        background-color: #52bb5edb;
         color: #ffff;
         border: 0px;
         height: 3rem;

@@ -128,7 +128,7 @@ function SuppliersList() {
           </div>
         </Form>
         <Footer>
-          <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
+          <Button type="submit" onClick={handleFormSubmit}>Save</Button>
           <Button type="submit" onClick={closeNewSupplierForm}>Close</Button>
           <NotificationContainer />
         </Footer>
