@@ -8,6 +8,7 @@ export const QUERY_ME = gql`
       email
       companyName
       companyDetails
+      isTrial
       userMaterials {
         material{
             _id
@@ -82,5 +83,13 @@ export const QUERY_CHEAPEST_SUPPLIER = gql`
 export const QUERY_REORDER_POINT = gql`
   query reorderPoint($supplierId: ID!, $materialId: ID!) {
     reorderPoint(supplierId: $supplierId, materialId: $materialId)
+  }
+`;
+
+export const QUERY_CHECKOUT = gql`
+  query Checkout {
+    checkout {
+      session
+    }
   }
 `;

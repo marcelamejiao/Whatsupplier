@@ -111,3 +111,25 @@ export const PLACE_ORDER = gql`
         }
     }
 `;
+
+export const UPGRADE_ACCOUNT = gql`
+    mutation UpgradeAccount($sessionId: ID!) {
+        upgradeAccount(sessionId: $sessionId) {
+            _id
+            username
+            email
+            companyName
+            companyDetails
+            isTrial
+            userMaterials {
+                material{
+                    _id
+                    name
+                }
+                stock
+                safetyStock
+                anticipatedDemand
+            }
+        }
+    }
+`;

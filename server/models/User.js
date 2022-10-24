@@ -27,6 +27,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isTrial: {
+      type: Boolean,
+      default: true,
+    },
     userMaterials: [userMaterialsSchema]
   },
 );

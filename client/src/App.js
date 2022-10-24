@@ -1,5 +1,4 @@
 import { ThemeProvider } from 'styled-components';
-import { Container } from './components/styles/Container.styled'
 import GlobalStyles from './components/styles/Global';
 import React from 'react';
 import 'react-notifications/lib/notifications.css';
@@ -24,6 +23,7 @@ import Production from './pages/Production'
 import SendMaterialToProduction from './pages/SendMaterialToProduction';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SuccessfulPayment from './pages/SuccessfulPayment';
 
 
 // Construct our main GraphQL API endpoint
@@ -65,7 +65,6 @@ function App() {
           <>
             <GlobalStyles />
             <Navbar />
-            <Container>
               <Routes>
                 <Route
                   path='/'
@@ -83,7 +82,10 @@ function App() {
                   path="/home"
                   element={<Home />}
                 />
-
+                <Route
+                 path="/success"
+                 element={<SuccessfulPayment />}
+                />
                 <Route
                   path="/inventory"
                   element={<MaterialsList />}
@@ -117,7 +119,6 @@ function App() {
                   element={<h1 className='display-2'>Wrong page!</h1>}
                 />
               </Routes>
-            </Container>
             <Footer />
           </>
         </Router>
