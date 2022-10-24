@@ -43,13 +43,12 @@ const Production = () => {
 
     return (
         <Container>
-            <h2>Production</h2>
-            <Table className="table">
+            <h1>Production</h1>
+            <Table className="table w-75 ml-auto mr-auto">
                 <thead>
                     <tr>
                         <th scope="col">Material Name</th>
                         <th scope="col">Stock</th>
-                        <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
                 </thead>

@@ -68,7 +68,7 @@ const MaterialsList = () => {
     const inventoryTable = showTable ?
         (
             <>
-                <Table>
+                <Table className='w-75 ml-auto mr-auto'>
                     <thead>
                         <tr>
                             <th scope="col">Name</th>

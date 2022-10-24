@@ -90,7 +90,7 @@ function SuppliersList() {
 
   const supplierTable = showTable ?
     (
-      <Table className="table">
+      <Table className="table w-75 ml-auto mr-auto">
         <thead>
           <tr>
             <th scope="col">Name</th>
