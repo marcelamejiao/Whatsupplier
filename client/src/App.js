@@ -24,6 +24,7 @@ import Production from './pages/Production'
 import SendMaterialToProduction from './pages/SendMaterialToProduction';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SuccessfulPayment from './pages/SuccessfulPayment';
 
 
 // Construct our main GraphQL API endpoint
@@ -83,7 +84,10 @@ function App() {
                   path="/home"
                   element={<Home />}
                 />
-
+                <Route
+                 path="/success"
+                 element={<SuccessfulPayment />}
+                />
                 <Route
                   path="/inventory"
                   element={<MaterialsList />}

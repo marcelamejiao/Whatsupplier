@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Supplier, Material } = require('../models');
 const { signToken } = require('../utils/auth');
+const stripe = require('stripe')('sk_test_51Lw2jTCa4vlrvSc1NZyMtZtAIkJURYOOptJ4n1bdWYsSgAsJZhPNC3zf1u1zBkQGaTQMaWxAsIRYZAm7iJgYjN8U0025RwoMZq');
 
 const resolvers = {
   Query: {
@@ -70,7 +71,29 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+    checkout: async (parent, args, context) => {
+      const url = new URL(context.headers.referer ?? 'http://localhost:3001').origin;
+      const line_items = [];
+
+      // Price ID of the product created in Stripe: https://dashboard.stripe.com/test/products
+      const priceId = 'price_1Lw2n9Ca4vlrvSc1AZ0cWmfb';
+
+      line_items.push({
+        price: priceId,
+        quantity: 1
+      });
+
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items,
+        mode: 'payment',
+        success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${url}/`
+      });
+
+      return { session: session.id };
+    },
   },
 
   Mutation: {
@@ -133,7 +156,6 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
     updateUserMaterial: async (parent, {_id, stock, safetyStock, anticipatedDemand } , context) => {
       await User.findOneAndUpdate(
         { _id: context.user._id },
@@ -152,7 +174,6 @@ const resolvers = {
       )
         .populate({ path: 'userMaterials.material', select: '-__v' });
     },
-
     updateSupplierMaterial: async (parent, { _id, materialId, cost, leadTime }, context) => {
       await Supplier.findOneAndUpdate(
         { _id: _id },
@@ -209,6 +230,32 @@ const resolvers = {
           .populate({ path: 'userMaterials.material', select: '-__v' });
 
         return await User.findOne({ _id: context.user._id }).populate('userMaterials.material');
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    upgradeAccount: async (parent, { sessionId }, context) => {
+      if (context.user) {
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+        if (session?.payment_status === 'paid') {
+          // Upgrade the user from Trial to Premium
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            {
+              isTrial: false,
+            },
+            {
+              new: true,
+              runValidators: true,
+            }
+          )
+            .populate('userMaterials.material');
+  
+          return user;
+        }
+  
+        return User.findOne({ _id: context.user._id }).populate('userMaterials.material');
       }
 
       throw new AuthenticationError('You need to be logged in!');
