@@ -28,7 +28,7 @@ export const SignupBody = styled.div`
             left: 40%;
             margin-top: 10%;
             margin-left: 20%;
-            background-color: #569ec2;
+            background-color: #52bb5edb;
             color: #ffff;
             border:0px ;
             height: 3rem;

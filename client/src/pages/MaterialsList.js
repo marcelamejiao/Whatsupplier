@@ -116,7 +116,8 @@ const MaterialsList = () => {
                     <h2>Add a new material</h2>
                     <div className="form-group">
                         <label htmlFor="name">Please Select the material</label>
-                        <select name="materialId" onChange={handleChange} >
+                        <select name="materialId" onChange={handleChange} defaultValue="" required>
+                            <option value="" disabled >--Please select a material--</option>
                             {materials.map((item, index) => { return <option key={index} value={item._id}>{item.name}</option> })}
                         </select>
                     </div>
@@ -133,7 +134,7 @@ const MaterialsList = () => {
                         <input type="number" className="form-control" name="anticipatedDemand" placeholder="100" min="0" onChange={handleChange} autoComplete="off" />
                     </div>
                     <Footer>
-                        <Button type="submit" style={{ backgroundColor: "#569ec2" }} onClick={handleFormSubmit}>Save</Button>
+                        <Button type="submit" onClick={handleFormSubmit}>Save</Button>
                         <Button type="button" onClick={closeNewMaterialForm}>Close</Button>
                         <NotificationContainer />
                     </Footer>
