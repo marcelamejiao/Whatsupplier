@@ -21,6 +21,16 @@ export const Button = styled.button`
     color: #ffff;
   }
 `
+export const StripeButton = styled.button`
+  width: 20rem;
+  margin: 3px;
+  background-color: #E9AA44;
+  border: 0px;
+  height: 3rem;
+  border-radius: 4px;
+  color: #ffff;
+`
+
 export const Card = styled.div`
   align-items: center;
   background-color: #fff;

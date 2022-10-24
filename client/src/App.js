@@ -1,5 +1,4 @@
 import { ThemeProvider } from 'styled-components';
-import { Container } from './components/styles/Container.styled'
 import GlobalStyles from './components/styles/Global';
 import React from 'react';
 import 'react-notifications/lib/notifications.css';
@@ -66,7 +65,6 @@ function App() {
           <>
             <GlobalStyles />
             <Navbar />
-            <Container>
               <Routes>
                 <Route
                   path='/'
@@ -121,7 +119,6 @@ function App() {
                   element={<h1 className='display-2'>Wrong page!</h1>}
                 />
               </Routes>
-            </Container>
             <Footer />
           </>
         </Router>

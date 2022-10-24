@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { QUERY_CHECKOUT, QUERY_ME } from '../utils/queries';
-import { HomeContainer, HomeBanner, Card, Button} from '../components/styles/Home.styled';
+import { HomeContainer, HomeBanner, Card, Button, StripeButton} from '../components/styles/Home.styled';
 import image from '../images/illustration-flowing-conversation.svg'
 import image2 from '../images/illustration-grow-together.svg'
 import image3 from '../images/illustration-your-users.svg'
@@ -46,7 +46,7 @@ function Home() {
         <p>Company Name: {companyName} {accountTypeBadge}</p>
         <p>Company Details: {companyDetails}</p>
         {
-          isTrial ? <button onClick={redirectToPayment}>Get WhatSupplier Premium!</button> : ''
+          isTrial ? <StripeButton onClick={redirectToPayment}>Get WhatSupplier Premium!</StripeButton> : ''
         }
       </HomeBanner>
       <Card>
