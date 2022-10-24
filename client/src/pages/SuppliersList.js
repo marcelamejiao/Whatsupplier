@@ -90,19 +90,21 @@ function SuppliersList() {
 
   const supplierTable = showTable ?
     (
-      <Table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {supplierList}
-        </tbody>
-      </Table>
+      <div className="table-responsive">
+        <Table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {supplierList}
+          </tbody>
+        </Table>
+      </div>
     ) : '';
 
   const newSupplierForm = showNewSupplierForm
