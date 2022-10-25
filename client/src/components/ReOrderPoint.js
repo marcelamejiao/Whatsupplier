@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_REORDER_POINT } from "../utils/queries";
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { PLACE_ORDER } from "../utils/mutations";
+import { Button } from '../components/styles/PlaceOrder.style'
 
 const ReorderPoint = ({ supplierId, materialId, materialStock }) => {
   const [placeOrder] = useMutation(PLACE_ORDER);
