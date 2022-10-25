@@ -8,7 +8,7 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
     loading: cheapestSupplierLoading,
     error: cheapestSupplierError,
     data: cheapestSupplierData,
-    refetch: referchCheapestSupplier
+    refetch: refetchCheapestSupplier
   } = useQuery(
     QUERY_CHEAPEST_SUPPLIER,
     {
@@ -19,7 +19,7 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
   );
 
   useEffect(() => {
-    const refetch = async () => await referchCheapestSupplier();
+    const refetch = async () => await refetchCheapestSupplier();
     refetch();
   }, []);
 
