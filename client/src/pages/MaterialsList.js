@@ -67,8 +67,8 @@ const MaterialsList = () => {
     })
     const inventoryTable = showTable ?
         (
-            <>
-                <Table>
+            <div className='table-responsive'>
+                <Table className='col-md-9 ml-auto mr-auto'>
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
@@ -81,7 +81,7 @@ const MaterialsList = () => {
                         {userMaterialsList}
                     </tbody>
                 </Table>
-            </>
+            </div>
         ) : '';
 
     const handleFormSubmit = async (event) => {

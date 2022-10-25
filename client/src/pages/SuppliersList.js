@@ -91,7 +91,7 @@ function SuppliersList() {
   const supplierTable = showTable ?
     (
       <div className="table-responsive">
-        <Table className="table">
+        <Table className="col-md-9 ml-auto mr-auto">
           <thead>
             <tr>
               <th scope="col">Name</th>

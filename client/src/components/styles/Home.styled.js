@@ -32,6 +32,9 @@ export const StripeButton = styled.button`
 `
 
 export const Card = styled.div`
+  :hover {
+  background-color: #dce0e6;
+  }
   align-items: center;
   background-color: #fff;
   border-radius: 15px;

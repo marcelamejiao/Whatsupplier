@@ -173,7 +173,7 @@ function SingleSupplier() {
       <MaterialContainer>
         <h2>Update Supplier's Materials</h2>
         <Container>
-          <Table className="table">
+          <Table className="table w-75 ml-auto mr-auto">
             <thead>
               <tr>
                 <th scope="col">Material</th>

@@ -3,12 +3,26 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     padding: 30px;
-    .table{
-        margin: 20px 0;
-        thead{
+    Table{
+        border-collapse: collapse;
+        margin: 25px 50px 25px 50px;
+        min-width: 400px;
+        border-radius: 8px 8px 0 0;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        thead {
             background-color: #569ec2;
             color: #ffff;
         }
+        tbody {
+            td {
+                width: 25%;
+            }
+            tr:hover {
+            background-color: #dce0e6;
+            }
+        }    
     }
     .editInventory{
         width: 10rem;
