@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_REORDER_POINT } from "../utils/queries";
@@ -12,12 +12,17 @@ const ReorderPoint = ({ supplierId, materialId, materialStock }) => {
     units: '',
   });
 
-  const {loading, error, data} = useQuery(QUERY_REORDER_POINT, {
+  const {loading, error, data, refetch} = useQuery(QUERY_REORDER_POINT, {
     variables: {
       supplierId: supplierId,
       materialId: materialId,
     }
   });
+
+  useEffect(() => {
+    const fetch = async () => await refetch();
+    fetch();
+  }, []);
 
   if (loading) {
     return 'Loading...';

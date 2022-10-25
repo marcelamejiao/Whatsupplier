@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_CHEAPEST_SUPPLIER } from '../utils/queries';
 import ReorderPoint from "./ReOrderPoint";
@@ -7,7 +7,8 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
   const {
     loading: cheapestSupplierLoading,
     error: cheapestSupplierError,
-    data: cheapestSupplierData
+    data: cheapestSupplierData,
+    refetch: refetchCheapestSupplier
   } = useQuery(
     QUERY_CHEAPEST_SUPPLIER,
     {
@@ -16,6 +17,11 @@ const CheapestSupplier = ({ materialId, materialStock }) => {
       }
     }
   );
+
+  useEffect(() => {
+    const refetch = async () => await refetchCheapestSupplier();
+    refetch();
+  }, []);
 
   if (cheapestSupplierLoading) {
     return 'Loading'
