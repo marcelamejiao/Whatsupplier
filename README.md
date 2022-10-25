@@ -82,7 +82,7 @@ npm run develop
 
 ## **Preview**
  
- <img src='./images/suppliermaterial-page.png'>
+ <img src='./images/singlematerial-page.png'>
  <img src='./images/addmaterial-page.png'>
  <img src='./images/premium-page.png'>
 
