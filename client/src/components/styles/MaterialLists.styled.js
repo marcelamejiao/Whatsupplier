@@ -3,6 +3,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     padding: 30px;
+        .table-wrapper {
+            overflow: scroll;
+        }
         Table{
             border-collapse: collapse;
             margin: 25px 50px 25px 50px;

@@ -44,18 +44,20 @@ const Production = () => {
     return (
         <Container>
             <h1>Production</h1>
-            <Table className="table w-75 ml-auto mr-auto">
-                <thead>
-                    <tr>
-                        <th scope="col">Material Name</th>
-                        <th scope="col">Stock</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {userMaterialsList}
-                </tbody>
-            </Table>
+            <div className='table-responsive'>
+                <Table className='col-md-9 ml-auto mr-auto'>
+                    <thead>
+                        <tr>
+                            <th scope="col">Material Name</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userMaterialsList}
+                    </tbody>
+                </Table>
+            </div>
         </Container>
 
     )
