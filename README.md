@@ -81,9 +81,20 @@ npm run develop
 * Heroku.
 
 ## **Preview**
+ <img src='./images/landing-page.png' >
+ <img src='./images/login-page.png' >
+ <img src='./images/signup-page.png' >
+ <img src='./images/supplierlist-page.png'>
+ <img src='./images/addsupplier-page.png'>
+ <img src='./images/suppliermaterial-page.png'>
+ <img src='./images/inventory-page.png'>
+ <img src='./images/addmaterial-page.png'>
+ <img src='./images/singlematerial-page.png'>
+ <img src='./images/updatematerial-page.png'>
+ <img src='./images/production-page.png'>
+ <img src='./images/sendtoproduction-page.png'>
+ <img src='./images/stripe-page.png'>
 
- ![]()
- ![]()
 
 ## **Testing with Stripe**
 
