@@ -2,14 +2,18 @@
 
 ## **Table of Contents** 
 
-- [**Description**](#description)
-- [**Installation**](#installation)
-- [**Technologies Used**](#technologies-used)
-- [**Preview**](#preview)
-- [**Testing with Stripe**](#testing-with-stripe)
-- [**Deployed link**](#deployed-link)
-- [**Future Development**](#future-development)
-- [**Questions**](#questions)
+- [**WhatSupplier - MERN Stack Single-Page Application**](#whatsupplier---mern-stack-single-page-application)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Description**](#description)
+    - [**User Story:**](#user-story)
+    - [**Wireframes:**](#wireframes)
+  - [**Installation**](#installation)
+  - [**Technologies Used**](#technologies-used)
+  - [**Preview**](#preview)
+  - [**Testing with Stripe**](#testing-with-stripe)
+  - [**Deployed link**](#deployed-link)
+  - [**Future Development**](#future-development)
+  - [**Questions**](#questions)
 
 
 ## **Description**
@@ -87,7 +91,7 @@ When testing the payment system (Stripe) please use one of the credit cards foun
 
 ## **Deployed link**
 
-💡 Live version: [click here!]()
+💡 Live version: [click here!](https://pacific-eyrie-89975.herokuapp.com/)
 
 ## **Future Development**
 
