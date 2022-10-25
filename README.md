@@ -94,6 +94,7 @@ npm run develop
  <img src='./images/production-page.png'>
  <img src='./images/sendtoproduction-page.png'>
  <img src='./images/stripe-page.png'>
+ <img src='./images/premium-page.png'>
 
 
 ## **Testing with Stripe**
