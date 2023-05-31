@@ -78,7 +78,7 @@ npm run develop
   * Mongo
 * Bcrypt
 * Stripe
-* Heroku.
+* Heroku (previously hosted on heroku)
 
 ## **Preview**
  
@@ -93,7 +93,7 @@ When testing the payment system (Stripe) please use one of the credit cards foun
 
 ## **Deployed link**
 
-💡 Live version: [click here!](https://pacific-eyrie-89975.herokuapp.com/)
+💡 Live version: [click here!](https://whatsupplier.rubencito.net/)
 
 ## **Future Development**
 
