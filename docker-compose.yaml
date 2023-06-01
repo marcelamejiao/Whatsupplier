@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: '.'
+      dockerfile: './docker/Dockerfile'
+    environment:
+      MONGODB_URI: 'mongodb://admin:secret@db/admin'
+    ports:
+      - 3001:3001
+  db:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
