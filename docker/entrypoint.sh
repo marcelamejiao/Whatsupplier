@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
-npm install
-npm run build
-exec npm run start
+# Exit on error
+set -e
+
+# Launch SupervisorD
+exec supervisord -n -c /etc/supervisor/supervisord.conf
