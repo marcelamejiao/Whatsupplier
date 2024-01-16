@@ -18,6 +18,8 @@
 
 ## **Description**
 
+Project idea by: [Marcela Mejia](https://github.com/marcelamejiao)
+
 This project provides a tool for organizing and optimizing the process of ordering, storing, and using a company’s inventory. Also this application selects the supplier with the lowest cost based on a specific material.
 
 In the Supply Chain process the factory purchases the materials from diverse suppliers. Using WhatSupplier the manager can choose the best offer in price when placing  an order. 
@@ -37,7 +39,7 @@ Order too late and you may run out of inventory resulting in waste in the form o
 Ref: https://apicsdotcoach.wordpress.com/2017/02/18/order-point/
 
 * Sending Materials to production: 
-When the user sends an amount of raw materials to production the total amount of this material will decrease. If it is time to place a new order a display notification is shown on screen to proceed with the reorder process. 
+When the user sends an amount of raw materials to production the total amount of this material will decrease. If it is time to place a new order a display notification is shown on screen to proceed with the reorder process.
 
 ### **User Story:**
   AS A manager in a Supplier/Inventory area,
@@ -93,7 +95,7 @@ When testing the payment system (Stripe) please use one of the credit cards foun
 
 ## **Deployed link**
 
-💡 Live version: [click here!](https://whatsupplier.rubencito.net/)
+💡 Live version: [click here!](https://whatsupplier.apps.marcelamejia.xyz/)
 
 ## **Future Development**
 
@@ -106,4 +108,4 @@ When testing the payment system (Stripe) please use one of the credit cards foun
 
 ## **Questions**
 
-* Contact us on our GitHub profiles: [Chujun's GitHub](https://github.com/dorisliu333) - [Marcela's GitHub](https://github.com/marcelamejiao)
+* Contact us on our GitHub profiles: [Marcela's GitHub](https://github.com/marcelamejiao) - [Chujun's GitHub](https://github.com/dorisliu333)
